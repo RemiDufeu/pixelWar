@@ -15,7 +15,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=admin
 
   backend:
-    image: pixelwar/webapp
+    image: pixelwar/backend
     build: 
       context: ./backend
       dockerfile: dockerfile
@@ -27,6 +27,19 @@ services:
     environment:
       - PORT=3001
       - MONGOCONNECTION=mongodb://admin:admin@mongodb:27017
+
+  frontend:
+    image: pixelwar/frontend
+    build: 
+      context: ./frontend
+      dockerfile: dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      myNetwork:
+        ipv4_address: 172.16.0.16
+    environment:
+      - PORT=3000
 
 networks:
   myNetwork:
