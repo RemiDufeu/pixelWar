@@ -1,10 +1,14 @@
-import Form1 from "./Form1";
+import Formsignup from "./Formsignup";
+import Formsignin from "./Formsignin";
+import { Users } from "./Users";
 
 const App = () => {
   return (
     <div className="container">
-      <h1>localStorage with React hooks</h1>
-      <Form1 />
+      <h1>PixelWar</h1>
+      <Formsignin />
+      <Formsignup />
+      <Users />
     </div>
   );
 };

@@ -6,7 +6,7 @@ import { getAllUsers } from '../query/user';
 export const Users = () => {
 	const [user, setUser] = useState([]);
 	useEffect(() => {
-		getAllUsers().then((u) => setUser(u));
+		getAllUsers().then((u) => setUser(u.data));
 	}, []);
 
 	return (
@@ -15,7 +15,11 @@ export const Users = () => {
 			<ul>
 				{ user.map((u) => (
 					<li key={u.id}>
-						{u.name}
+						{u.nom}
+						<br />
+						{u.prenom}
+						<br />
+						{u.email}
 					</li>
 				))}
 			</ul>
