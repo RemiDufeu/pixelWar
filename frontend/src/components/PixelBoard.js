@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-const PixelBoard = ({pixelBoard}) => {
+const PixelBoard = ({pixelBoard, colorState}) => {
 	
     const canvasRef = useRef(null);
     const [posX , setPosX] = useState(null);
@@ -39,6 +39,16 @@ const PixelBoard = ({pixelBoard}) => {
         (posX !== null && posY !== null) && drawSelecionnedPixel(context, posX, posY);
     }, [posX, posY]);
 
+    const mouseDraw = (e) => {
+        const canvas = canvasRef.current;
+        const rect = canvas.getBoundingClientRect()
+        const x = Math.floor((e.clientX - rect.left) / pixelBoard.pixelSize)
+        const y = Math.floor((e.clientY - rect.top) / pixelBoard.pixelSize)
+        const context = canvas.getContext('2d')
+        console.log(x, y)
+        drawPixel(context, x + y * pixelBoard.width , colorState)
+    };
+
 	useEffect(() => {
         const canvas = canvasRef.current
 		const resize = () => {
@@ -55,16 +65,6 @@ const PixelBoard = ({pixelBoard}) => {
         const mouseExit = () => {
             setPosX(null)
             setPosY(null)
-        };
-
-        const mouseDraw = (e) => {
-            const canvas = canvasRef.current;
-            const rect = canvas.getBoundingClientRect()
-            const x = Math.floor((e.clientX - rect.left) / pixelBoard.pixelSize)
-            const y = Math.floor((e.clientY - rect.top) / pixelBoard.pixelSize)
-            const context = canvas.getContext('2d')
-            console.log(x, y)
-            drawPixel(context, x + y * pixelBoard.width , 'red')
         };
 
 		window.addEventListener('resize',resize);
