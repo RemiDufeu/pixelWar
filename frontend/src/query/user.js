@@ -4,6 +4,7 @@ const USER_API_PATH = '/auth';
 const USER_ALL = '/all';
 const USER_SIGNUP_PATH = '/signUp';
 const USER_LOGIN_PATH = '/signIn';
+const USER_LOGIN_TOKEN_PATH = '/signInToken';
 const USER_LOGOUT_PATH = '/logout';
 const USER_PROFILE_PATH = '/profile';
 const USER_PROFILE_UPDATE_PATH = '/profile/update';
@@ -68,6 +69,23 @@ export const loginUser = async (email, password) => {
 			},
 			body: body,
 		});
+	if (resp.ok) {
+		return resp.json();
+	}
+	throw new Error('Unable to login user');
+}
+
+export const loginTokenUser = async (token) => {
+	
+	const resp = await fetch(`${REACT_APP_API_URL}${USER_API_PATH}${USER_LOGIN_TOKEN_PATH}`, {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+			'Authorization' : 'Bearer '+ token
+		},
+	})
+
 	if (resp.ok) {
 		return resp.json();
 	}

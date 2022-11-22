@@ -72,7 +72,7 @@ exports.signInToken = (req, res, next) => {
 
     try {
     jwt.verify(token,process.env.JWTCRYPT)
-    res.status(200).json({ message: 'Utlisateur authentifié'})
+    res.status(200).json({ message: 'Utlisateur authentifié', user : jwt.decode(token)})
     
     } catch(error) {
         res.status(401).json({error : 'Requête non authentifiée !'})

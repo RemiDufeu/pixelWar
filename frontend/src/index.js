@@ -11,6 +11,9 @@ import {
 
 import BoardPage from './pages/BoardPage';
 import HomePage from './pages/HomePage';
+import SignIn from './pages/SignInPage';
+import SignUp from './pages/SignUpPage';
+import AdminPage from './pages/AdminPage';
 
 const router = createBrowserRouter([
 	{
@@ -19,6 +22,15 @@ const router = createBrowserRouter([
 	},{
 	  path: "/PixelBoard",
 	  element: <BoardPage />,
+	},{
+	  path: "/SignUp",
+	  element: <SignUp />,
+	},{
+	  path: "/SignIn",
+	  element: <SignIn />,
+	}, {
+	  path : '/Admin',
+	  element : <AdminPage />,
 	}
   ]);
 
