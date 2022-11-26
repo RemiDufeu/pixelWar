@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { loginUser } from "../query/user";
 import useLocalStorage from "../lib/useLocalStorage";
+import { Input, Form, Container, FormGroup, Label, Button } from "reactstrap";
 
 const Formsignin = () => {
-    const [password, setPassword] = useState("password");
-    const [email, setEmail] = useState("email");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
     const [token, setToken] = useLocalStorage("token", null);
 
   function handlePost(event) {
@@ -19,33 +20,35 @@ const Formsignin = () => {
 
 
   return (
-    <form>
-        <p>Sign in</p>
-        <input
-        type="text"
+    <Container style={{ marginTop: "80px" }}>
+      
+    <Form>
+        
+        
+        <FormGroup floating>
+        
+        <Input
+        type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
         aria-label="email"
       />
-      <input
-        type="text"
+      <Label for="email">Email</Label>
+      </FormGroup>
+      <FormGroup floating>
+      <Input
+        type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
         aria-label="password"
       />
-      <input
-        type="text"
-        value={token}
-        onChange={(e) => setToken(e.target.value)}
-        placeholder="Token"
-        aria-label="token"
-      />
-
-      
-      <input type="submit" value="Submit" onClick={handlePost} /> 
-    </form>
+      <Label for="password">Password</Label>
+      </FormGroup>
+      <Button onClick={handlePost} size="lg" color="primary" style={{marginTop: 30,textAlign: "center", margin: "auto", display: "flex"}}>Submit</Button>
+    </Form>
+    </Container>
   );
 };
 

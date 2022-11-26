@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { postUser } from "../query/user";
 
 const Formsignup = () => {
-  const [name, setName] = useState("name");
-  const [password, setPassword] = useState("password");
-  const [passwordConfirm, setPasswordConfirm] = useState("passwordConfirm");
-  const [email, setEmail] = useState("email");
-  const [prenom, setPrenom] = useState("prenom");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [email, setEmail] = useState("");
+  const [prenom, setPrenom] = useState("");
   function handlePost(event) {
     event.preventDefault();
     console.log(name);
@@ -18,46 +19,62 @@ const Formsignup = () => {
 
 
   return (
-    <form>
-        <p>Sign up</p>
-    <input
+    <Container style={{ marginTop: "80px" }}>
+    <Form>
+    SignUp
+        <FormGroup floating>
+        <Input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Nom"
+        aria-label="Nom" 
+      />
+      <Label for="Nom">Nom</Label>
+        </FormGroup>
+        <FormGroup floating>
+        <Input
         type="text"
         value={prenom}
         onChange={(e) => setPrenom(e.target.value)}
         placeholder="Prenom"
-        aria-label="prenom"
+        aria-label="Prenom"
       />
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Full name"
-        aria-label="fullname"
-      />
-      <input
-        type="text"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        aria-label="password"
-      />
-      <input
-        type="text"
-        value={passwordConfirm}
-        onChange={(e) => setPasswordConfirm(e.target.value)}
-        placeholder="Password Confirm"
-        aria-label="passwordConfirm"
-      />
-      <input
-        type="text"
+      <Label for="Prenom">Prenom</Label>
+        </FormGroup>
+        <FormGroup floating>
+        <Input
+        type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
         aria-label="email"
       />
-      
-      <input type="submit" value="Submit" onClick={handlePost} /> 
-    </form>
+      <Label for="email">Email</Label>
+        </FormGroup>
+        <FormGroup floating>
+        <Input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+        aria-label="password"
+      />
+      <Label for="password">Password</Label>
+        </FormGroup>
+        <FormGroup floating>
+        <Input
+        type="password"
+        value={passwordConfirm}
+        onChange={(e) => setPasswordConfirm(e.target.value)}
+        placeholder="PasswordConfirm"
+        aria-label="passwordConfirm"
+      />
+      <Label for="passwordConfirm">PasswordConfirm</Label>
+        </FormGroup>
+        <Button onClick={handlePost} size="lg" color="primary" style={{marginTop: 30,textAlign: "center", margin: "auto", display: "flex"}}>Submit</Button>
+    </Form>
+    </Container>
   );
 };
 
