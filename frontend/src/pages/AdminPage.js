@@ -1,11 +1,12 @@
 import React from 'react'
 import Loading from '../components/Loading';
 import TopBar from '../components/Topbar';
+import { Users } from '../components/Users';
 import { useRequireRole } from '../lib/useRole';
 
 const AdminPage = () => {
 
-    const [loading, userRole] = useRequireRole('admin');
+    const [loading, userRole] = useRequireRole(['admin','user']);
 
     if (loading) {
         return <Loading />;
@@ -15,6 +16,7 @@ const AdminPage = () => {
     <>
         <TopBar/>
       <div>AdminPage</div>
+      <Users/>
     </>
   )
 }

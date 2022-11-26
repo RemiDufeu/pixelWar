@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useLocalStorage from "./useLocalStorage";
 import { loginTokenUser} from "../query/user"
 
-function useRequireRole(role = "admin", redirectUrl = "/SignIn") {
+function useRequireRole(role = ["admin"], redirectUrl = "/SignIn") {
     const navigate = useNavigate();
     const [token, setToken] = useLocalStorage("token", null);
 
@@ -22,7 +22,7 @@ function useRequireRole(role = "admin", redirectUrl = "/SignIn") {
             })
             .then((roleRes) => {
                 setLoading(false);
-                if (roleRes !== role) {
+                if (!role.includes(roleRes)) {
                     navigate(redirectUrl);
             }})
             .catch((error) => {

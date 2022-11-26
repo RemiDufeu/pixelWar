@@ -12,7 +12,6 @@ const USER_PROFILE_DELETE_PATH = '/profile/delete';
 
 
 export const getAllUsers = async () => {
-	console.log(localStorage.getItem('token'))
 	const resp = await fetch(`${REACT_APP_API_URL}${USER_API_PATH}${USER_ALL}`,
 		{
 			method: 'GET',
