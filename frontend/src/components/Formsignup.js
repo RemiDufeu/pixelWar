@@ -1,25 +1,39 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { postUser } from "../query/user";
 
-const Formsignup = () => {
+const Formsignup = ({redirectUrl = "/SignIn"}) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [email, setEmail] = useState("");
   const [prenom, setPrenom] = useState("");
+  const [errormessage, setError] = useState(null);
+  const navigate = useNavigate();
+
   function handlePost(event) {
     event.preventDefault();
     console.log(name);
     // eslint-disable-next-line no-console
     postUser(name, prenom, password, passwordConfirm, email).then((u) =>
-    console.log(u)
-    );
+    {
+      console.log(u);
+      navigate(redirectUrl);
+    }
+    ).catch((e) => {setError(e.message);
+    console.log(e);});
+  }
+
+  let err = null;
+  if (errormessage) {
+    err =  <div>{errormessage}</div>;
   }
 
 
   return (
     <Container style={{ marginTop: "80px" }}>
+    <p style={{color: "red"}}>{err}</p>
     <Form>
     SignUp
         <FormGroup floating>

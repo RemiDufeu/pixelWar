@@ -14,6 +14,7 @@ const TopBar = () => {
             <Link to="/SignIn">Sign in  </Link>
             <Link to="/SignUp">Sign up </Link>
             <Link to="/Admin">Admin </Link>
+            <Link to="/Logout">Logout </Link>
         </header>
     );
 };

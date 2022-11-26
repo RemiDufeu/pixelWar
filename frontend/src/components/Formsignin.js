@@ -2,31 +2,44 @@ import { useState } from "react";
 import { loginUser } from "../query/user";
 import useLocalStorage from "../lib/useLocalStorage";
 import { Input, Form, Container, FormGroup, Label, Button } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 
-const Formsignin = () => {
+const Formsignin = ({ redirectUrl = "/PixelBoard"}) => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [token, setToken] = useLocalStorage("token", null);
+    const [errormessage, setError] = useState(null);
+    const navigate = useNavigate();
 
   function handlePost(event) {
     event.preventDefault();
     console.log(email);
     // eslint-disable-next-line no-console
-    loginUser( email, password).then((u) =>
-      setToken(u.token)
-    ).catch((e) => setToken(null));
+    loginUser(email, password).then((u) =>{
+      console.log(redirectUrl);
+      setToken(u.token);
+      navigate(redirectUrl);
+    }
+    ).catch((e) => {setToken(null); setError(e.message);});
     console.log(token);
+
   }
 
+  if (token) {
+    navigate(redirectUrl);
+  }
+
+  let err = null;
+  if (errormessage) {
+    err =  <div>{errormessage}</div>;
+  }
+  
 
   return (
     <Container style={{ marginTop: "80px" }}>
-      
+    <p style={{color: "red"}}>{err}</p>
     <Form>
-        
-        
         <FormGroup floating>
-        
         <Input
         type="email"
         value={email}

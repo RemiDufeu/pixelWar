@@ -15,6 +15,7 @@ import HomePage from './pages/HomePage';
 import SignIn from './pages/SignInPage';
 import SignUp from './pages/SignUpPage';
 import AdminPage from './pages/AdminPage';
+import Logout from './components/Logout';
 
 const router = createBrowserRouter([
 	{
@@ -32,6 +33,9 @@ const router = createBrowserRouter([
 	}, {
 	  path : '/Admin',
 	  element : <AdminPage />,
+	}, {
+		path : '/Logout',
+		element : <Logout />,
 	}
   ]);
 
