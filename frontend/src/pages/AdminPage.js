@@ -6,7 +6,7 @@ import { useRequireRole } from '../lib/useRole';
 
 const AdminPage = () => {
 
-    const [loading, userRole] = useRequireRole(['admin','user']);
+    const [loading, userRole] = useRequireRole(['admin']);
 
     if (loading) {
         return <Loading />;
