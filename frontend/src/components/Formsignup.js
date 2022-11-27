@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { postUser } from "../query/user";
+import Loading from "./Loading";
 
 const Formsignup = ({redirectUrl = "/SignIn"}) => {
   const [name, setName] = useState("");
@@ -11,29 +12,36 @@ const Formsignup = ({redirectUrl = "/SignIn"}) => {
   const [prenom, setPrenom] = useState("");
   const [errormessage, setError] = useState(null);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  function handlePost(event) {
+  async function handlePost(event) {
     event.preventDefault();
+    setLoading(true);
     console.log(name);
     // eslint-disable-next-line no-console
     postUser(name, prenom, password, passwordConfirm, email).then((u) =>
     {
       console.log(u);
       navigate(redirectUrl);
+      setLoading(false);
     }
-    ).catch((e) => {setError(e.message);
-    console.log(e);});
+    ).catch((e) => {
+      setError(e.message);
+      console.log(e);
+      setLoading(false);
+    });
+      
   }
 
   let err = null;
   if (errormessage) {
-    err =  <div>{errormessage}</div>;
+    err =  <p style={{color: "red"}}>{errormessage}</p>;
   }
 
 
   return (
     <Container style={{ marginTop: "80px" }}>
-    <p style={{color: "red"}}>{err}</p>
+    {err}
     <Form>
     SignUp
         <FormGroup floating>
@@ -86,7 +94,7 @@ const Formsignup = ({redirectUrl = "/SignIn"}) => {
       />
       <Label for="passwordConfirm">PasswordConfirm</Label>
         </FormGroup>
-        <Button onClick={handlePost} size="lg" color="primary" style={{marginTop: 30,textAlign: "center", margin: "auto", display: "flex"}}>Submit</Button>
+        {loading ? <Loading></Loading> : <Button onClick={handlePost} size="lg" color="primary" style={{marginTop: 30,textAlign: "center", margin: "auto", display: "flex"}}>Submit</Button>}
     </Form>
     </Container>
   );

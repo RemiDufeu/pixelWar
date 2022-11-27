@@ -9,8 +9,6 @@ const USER = '/user';
 const USER_SIGNUP_PATH = '/signUp';
 const USER_LOGIN_PATH = '/signIn';
 const USER_LOGIN_TOKEN_PATH = '/signInToken';
-const USER_LOGOUT_PATH = '/logout';
-const USER_PROFILE_PATH = '/profile';
 const USER_PROFILE_UPDATE_PATH = '/profile/update';
 const USER_PROFILE_DELETE_PATH = '/profile/delete';
 
@@ -31,7 +29,15 @@ export const getAllUsers = async () => {
 		console.log(resp);
 		console.log('401');
 	}
-	throw new Error('Unable to get users');
+	if (!resp.ok){
+		try {
+			const error = await resp.json();
+			throw new Error(error.error);
+		} catch (e) {
+			throw new Error(e.message);
+		}
+		
+	}
 };
 export const getUser = async (id) => {
 	console.log("TOKEN AVANT"+localStorage.getItem('token'));
@@ -55,12 +61,14 @@ export const getUser = async (id) => {
 		console.log("OOKKKKKKKK RESPONSE");
 		return resp.json();
 	}
-	if (resp.status === 401) {
-		console.log(resp.body);
-		console.log(resp);
-		console.log('401');
+	if (!resp.ok){
+		try {
+			const error = await resp.json();
+			throw new Error(error.error);
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
-	throw new Error('Unable to get user');
 };
 
 export const postUser = async (nom, prenom, password, passwordConfirm, email) => {
@@ -82,10 +90,21 @@ export const postUser = async (nom, prenom, password, passwordConfirm, email) =>
 			body: body,
 
 		});
+	
+	if (!resp.ok){
+		try {
+			const error = await resp.json();
+			throw new Error(error.error);
+		} catch (e) {
+			throw new Error(e.message);
+		}
+		
+	}
+
+	
 	if (resp.ok) {
 		return resp.json();
 	}
-	throw new Error('Unable to post user');
 };
 
 export const loginUser = async (email, password) => {
@@ -104,7 +123,15 @@ export const loginUser = async (email, password) => {
 	if (resp.ok) {
 		return resp.json();
 	}
-	throw new Error('Unable to login user');
+	if (!resp.ok){
+		try {
+			const error = await resp.json();
+			throw new Error(error.error);
+		} catch (e) {
+			throw new Error(e.message);
+		}
+		
+	}
 }
 
 export const loginTokenUser = async (token) => {
@@ -121,5 +148,13 @@ export const loginTokenUser = async (token) => {
 	if (resp.ok) {
 		return resp.json();
 	}
-	throw new Error('Unable to login user');
+	if (!resp.ok){
+		try {
+			const error = await resp.json();
+			throw new Error(error.error);
+		} catch (e) {
+			throw new Error(e.message);
+		}
+		
+	}
 }

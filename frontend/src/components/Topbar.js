@@ -15,11 +15,11 @@ const TopBar = () => {
     if (localStorage.getItem("token") != null && localStorage.getItem('token') !== 'null') {
         
         console.log("token : "+localStorage.getItem('token'));
-        welcomeUser = <div>Welcome, You are connected</div>;
+        welcomeUser = <p style={{color: "green"}}>Welcome, You are connected {id}</p>;
         log = <Link to="/Logout">Logout</Link>;
 
     }else{
-        welcomeUser = <div>Welcome, You are not connected</div>;
+        welcomeUser = <p style={{color: "red"}}>Welcome, You are not connected</p>;
         log = <Link to="/SignIn">Login</Link>;
     }
 

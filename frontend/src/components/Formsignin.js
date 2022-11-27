@@ -14,21 +14,21 @@ const Formsignin = ({ redirectUrl = "/"}) => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
-    const handlePost = (event) => {
-    setLoading(true);
-    console.log(email);
-    // eslint-disable-next-line no-console
-    
-    loginUser(email, password).then((u) =>{
-      console.log(redirectUrl);
-      setToken(u.token);
-      navigate(redirectUrl);
+    async function handlePost(event) {
+        event.preventDefault();
+        setLoading(true);
+        loginUser(email, password)
+        .then((res) => {
+            setToken(res.token);
+            setLoading(false);
+            navigate(redirectUrl);
+        })
+        .catch((error) => {
+            setError(error.message);
+            setLoading(false);
+        });
     }
-    ).catch((e) => {setToken(null); setError(e.message);});
-    console.log(token);
-    setLoading(false);
 
-  }
 
   if (token) {
     navigate(redirectUrl);
@@ -36,16 +36,14 @@ const Formsignin = ({ redirectUrl = "/"}) => {
 
   let err = null;
   if (errormessage) {
-    err =  <div>{errormessage}</div>;
+    err =  <p style={{color: "red"}}>{errormessage}</p>;
   }
   
 
   return (
     <div>
-    {loading ? <Loading /> : null}
-    
     <Container style={{ marginTop: "80px" }}>
-    <p style={{color: "red"}}>{err}</p>
+    {err}
     <Form>
         <FormGroup floating>
         <Input
@@ -67,7 +65,7 @@ const Formsignin = ({ redirectUrl = "/"}) => {
       />
       <Label for="password">Password</Label>
       </FormGroup>
-      <Button onClick={handlePost} size="lg" color="primary" style={{marginTop: 30,textAlign: "center", margin: "auto", display: "flex"}}>Submit</Button>
+    {loading ? <Loading /> : <Button onClick={handlePost} size="lg" color="primary" style={{marginTop: 30,textAlign: "center", margin: "auto", display: "flex"}}>Submit</Button>}
     </Form>
     </Container>
     </div>
