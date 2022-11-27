@@ -5,42 +5,45 @@ import {
     useParams 
   } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
+import { useUser } from "../lib/useUser";
 
 const TopBar = () => {
-    const [id, setId] = useState([]);
 
-    let welcomeUser =null;
-    let log = null;
+    const [loading, user ] = useUser();
 
-    if (localStorage.getItem("token") != null && localStorage.getItem('token') !== 'null') {
-        
-        console.log("token : "+localStorage.getItem('token'));
-        welcomeUser = <p style={{color: "green"}}>Welcome, You are connected {id}</p>;
-        log = <Link to="/Logout">Logout</Link>;
-
-    }else{
-        welcomeUser = <p style={{color: "red"}}>Welcome, You are not connected</p>;
-        log = <Link to="/SignIn">Login</Link>;
-    }
-
-    useEffect(() => {
-    const id= JSON.parse(localStorage.getItem('id'));
-    if (id) {
-        setId(id);
-    }
-    }, []);
-
-    return (
-        <header className="topbar">
+    const TopBarConnected = () => {
+        return (
+            <>
             <Link to="/">Home </Link>
             <Link to="/PixelBoard">PixelBoard </Link>
+            {user.userRole === 'admin' && <Link to="/Admin">Admin </Link>}
+            {user.userRole === 'valideur' && <Link to="/Admin">Todo valideur</Link>}
+            <Link to={"/UserDetails/"+user.userId}>UserDetails </Link>
+            <Link to="/Logout">Logout</Link>
+            <p style={{color: "green"}}>Welcome, You are connected {user.userId}</p>
+        </>)
+    }
+
+    const TopBarNotConnected = () => {
+        return (<>
+            <Link to="/">Home </Link>
             <Link to="/SignUp">Sign up </Link>
-            <Link to="/Admin">Admin </Link>
-            <Link to={"/UserDetails/"+id}>UserDetails </Link>
-            {log}
-            {welcomeUser}
-        </header>
-    );
+            <Link to="/SignIn">Login</Link>
+            <p style={{color: "red"}}>Welcome, You are not connected</p>
+            </>
+        )
+    }
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    if (user) {
+        return <TopBarConnected />;
+    } else {
+        return <TopBarNotConnected />;
+    }
+
 };
 
 export default TopBar;
