@@ -5,7 +5,7 @@ const { REACT_APP_API_URL } = process.env;
 const USER_API_PATH = '/auth';
 const USER_ALL = '/all';
 //Tempo
-const USER = '/user/637a5d65ff0b7b7b0d89a78';
+const USER = '/user';
 const USER_SIGNUP_PATH = '/signUp';
 const USER_LOGIN_PATH = '/signIn';
 const USER_LOGIN_TOKEN_PATH = '/signInToken';
@@ -35,7 +35,7 @@ export const getAllUsers = async () => {
 };
 export const getUser = async (id) => {
 	console.log("TOKEN AVANT"+localStorage.getItem('token'));
-	const resp = await fetch(`${REACT_APP_API_URL}${USER_API_PATH}${USER}`,
+	const resp = await fetch(`${REACT_APP_API_URL}${USER_API_PATH}${USER}/${id}`,
 	
 		{
 			method: 'GET',
