@@ -1,3 +1,4 @@
+import PixelBoards from "../components/PixelBoards";
 import TopBar from "../components/Topbar";
 
 const HomePage = () => {
@@ -7,6 +8,7 @@ const HomePage = () => {
         <div>
             <h1>Home</h1>
         </div>
+    <PixelBoards/>
     </>);
 };
 

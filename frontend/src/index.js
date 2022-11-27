@@ -24,7 +24,7 @@ const router = createBrowserRouter([
 	  path: "/",
 	  element: <HomePage />,
 	},{
-	  path: "/PixelBoard",
+	  path: "/PixelBoard/:id",
 	  element: <BoardPage />,
 	},{
 	  path: "/SignUp",

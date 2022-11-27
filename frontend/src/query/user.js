@@ -1,4 +1,3 @@
-import { createPath } from "react-router-dom";
 
 /* eslint-disable linebreak-style */
 const { REACT_APP_API_URL } = process.env;

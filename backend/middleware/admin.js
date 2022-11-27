@@ -9,6 +9,7 @@ module.exports = (req, res, next) => {
         const decodedToken = jwt.verify(token, process.env.JWTCRYPT);
         
         const userRole = decodedToken.userRole;
+        req.auth = decodedToken.userId
        if (userRole !== 'admin') {
             throw 'role non valide'
         } else {

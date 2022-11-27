@@ -2,21 +2,23 @@ const mongoose = require('mongoose');
 
 const pixelBoardSchema = mongoose.Schema({
     name: { type: String, required: true },
-    status : { type: String, enum : ['brouillon','actif','inactif'], default: 'brouillon'},
-    width: { type: Number, required: true, validate : {
+    status : { type: String, enum : ['actif','inactif'], default: 'actif'},
+    width: { type: Number, required: true , min : 10, max: 500,validate : {
         validator : Number.isInteger,
         message   : '{VALUE} is not an integer value'
       }
     },
-    height: { type: Number, required: true, validate : {
+    isPublic : { type: Boolean, default: false},
+    mode : { type: String, enum : ['onePixel','infinite'], default: 'infinite'},
+    height: { type: Number, required: true, min : 10, max: 500, validate : {
         validator : Number.isInteger,
         message   : '{VALUE} is not an integer value'
       }
     },
     creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    dateFin: { type: Date, required: true },
+    dateFin: { type: Date },
     pixelsView: { type: Array, required: true },
-    delais: { type: Number, required: true, validate : {
+    delais: { type: Number, required: true, min : 10, max: 3600, validate : {
         validator : Number.isInteger,
         message   : '{VALUE} is not an integer value'
       }

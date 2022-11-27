@@ -1,4 +1,5 @@
 import React from 'react'
+import CreateBoard from '../components/CreateBoard';
 import Loading from '../components/Loading';
 import TopBar from '../components/Topbar';
 import { Users } from '../components/Users';
@@ -17,6 +18,7 @@ const AdminPage = () => {
         <TopBar/>
       <div>AdminPage</div>
       <Users/>
+      <CreateBoard/>
     </>
   )
 }
