@@ -15,6 +15,7 @@ import HomePage from './pages/HomePage';
 import SignIn from './pages/SignInPage';
 import SignUp from './pages/SignUpPage';
 import AdminPage from './pages/AdminPage';
+import UserDetails from './pages/UserPage';
 
 const router = createBrowserRouter([
 	{
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
 	}, {
 	  path : '/Admin',
 	  element : <AdminPage />,
-	}
+	},
+	{
+		path : '/UserDetails/:id',
+		element : <UserDetails />,
+	  }
   ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

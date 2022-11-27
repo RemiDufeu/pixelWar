@@ -7,15 +7,23 @@ const Formsignin = () => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [token, setToken] = useLocalStorage("token", null);
+    const [id, setId] = useLocalStorage("id", null);
 
   function handlePost(event) {
     event.preventDefault();
     console.log(email);
     // eslint-disable-next-line no-console
     loginUser( email, password).then((u) =>
-      setToken(u.token)
+      {
+        setToken(u.token);
+        setId(u.userId);
+        console.log("token1"+u.token)
+      }
+      
+      
     ).catch((e) => setToken(null));
-    console.log(token);
+    console.log("tokeen2"+token);
+    
   }
 
 

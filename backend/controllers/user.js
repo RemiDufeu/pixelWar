@@ -86,6 +86,12 @@ exports.getUsers = (req, res, next) => {
         .catch(error => res.status(400).json({ error }))
 }
 
+exports.getUser = (req, res, next) => {
+    User.findOne({ _id: req.params.id })
+        .then(user => res.status(200).json({ message: 'Objet trouvé', data: user }))
+        .catch(error => res.status(400).json({ error }))
+}
+
 exports.updateRole = (req, res, next) => {
     User.updateOne({ _id: req.params.id }, { role : req.query.role })
         .then(() => res.status(200).json({ message: 'Objet modifié !' }))
