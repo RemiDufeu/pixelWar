@@ -3,30 +3,21 @@ import { loginUser } from "../query/user";
 import useLocalStorage from "../lib/useLocalStorage";
 import { Input, Form, Container, FormGroup, Label, Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
-const Formsignin = ({ redirectUrl = "/PixelBoard"}) => {
+const Formsignin = ({ redirectUrl = "/"}) => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [token, setToken] = useLocalStorage("token", null);
     const [id, setId] = useLocalStorage("id", null);
     const [errormessage, setError] = useState(null);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
-  function handlePost(event) {
-    event.preventDefault();
+    const handlePost = (event) => {
+    setLoading(true);
     console.log(email);
     // eslint-disable-next-line no-console
-
-    loginUser( email, password).then((u) =>
-      {
-        setToken(u.token);
-        setId(u.userId);
-        console.log("token1"+u.token)
-      }
-      
-      
-    ).catch((e) => setToken(null));
-    console.log("tokeen2"+token);
     
     loginUser(email, password).then((u) =>{
       console.log(redirectUrl);
@@ -35,6 +26,7 @@ const Formsignin = ({ redirectUrl = "/PixelBoard"}) => {
     }
     ).catch((e) => {setToken(null); setError(e.message);});
     console.log(token);
+    setLoading(false);
 
   }
 
@@ -49,6 +41,9 @@ const Formsignin = ({ redirectUrl = "/PixelBoard"}) => {
   
 
   return (
+    <div>
+    {loading ? <Loading /> : null}
+    
     <Container style={{ marginTop: "80px" }}>
     <p style={{color: "red"}}>{err}</p>
     <Form>
@@ -75,6 +70,7 @@ const Formsignin = ({ redirectUrl = "/PixelBoard"}) => {
       <Button onClick={handlePost} size="lg" color="primary" style={{marginTop: 30,textAlign: "center", margin: "auto", display: "flex"}}>Submit</Button>
     </Form>
     </Container>
+    </div>
   );
 };
 
