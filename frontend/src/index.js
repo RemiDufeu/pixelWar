@@ -16,6 +16,8 @@ import SignIn from './pages/SignInPage';
 import SignUp from './pages/SignUpPage';
 import AdminPage from './pages/AdminPage';
 import UserDetails from './pages/UserPage';
+import Logout from './components/Logout';
+
 
 const router = createBrowserRouter([
 	{
@@ -33,11 +35,15 @@ const router = createBrowserRouter([
 	}, {
 	  path : '/Admin',
 	  element : <AdminPage />,
-	},
-	{
+
+	}, {
 		path : '/UserDetails/:id',
 		element : <UserDetails />,
-	  }
+	}, {
+		path : '/Logout',
+		element : <Logout />,
+	}
+
   ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
