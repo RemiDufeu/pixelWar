@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { Container } from "reactstrap";
 import ColorPicker from "../components/ColorPicker";
 import Loading from "../components/Loading";
 import PixelBoard from "../components/PixelBoard";
@@ -10,6 +11,7 @@ import { getPixelBoard } from "../query/pixelboard";
 const BoardPage = () => {
     const [color, setColor] = useState('#FF4500');
     const params = useParams();
+    const navigate = useNavigate();
 
     const [loading, user] = useUser();
     const [board, setBoard] = useState(null);
@@ -17,6 +19,8 @@ const BoardPage = () => {
     useEffect(() => {
       getPixelBoard(params.id).then((res) => {
         setBoard(res);
+      }).catch((error) => {
+        navigate("/");
       });
     }, []);
 
@@ -63,13 +67,18 @@ const BoardPage = () => {
       };
       return (<>
         <TopBar/>
-        <h1>{board && board.name}</h1>
-        <div className="container flexBetween">
-            <div>BoardPage color : {color}</div>
-          <PixelBoard pixelBoard={pixelBoard} colorState={color}/>
+        <div>
+        <Container>
+          <h1>{board && board.name}</h1>
+        </Container>
+        <div className="flexBetween">
+          <div style={{margin : '0 auto'}}>
+            <PixelBoard pixelBoard={pixelBoard} colorState={color}/>
+          </div>
           <ColorPicker colorState={color} setColor={setColor}/>
         </div>
-      </>)
+        </div>
+      </>);
 }
 
 export default BoardPage

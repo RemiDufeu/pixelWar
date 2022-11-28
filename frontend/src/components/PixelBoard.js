@@ -1,66 +1,41 @@
 /* eslint-disable no-console */
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { FormGroup, Input, Label } from 'reactstrap';
+import { getPixelBoard } from '../query/pixelboard';
 
-const PixelBoard = ({pixelBoard, colorState}) => {
+const PixelBoard = ({colorState}) => {
+
+    const params = useParams();
 	
     const canvasRef = useRef(null);
+    const [pixelW, setPixelW] = useState(40);
+
     const [posX , setPosX] = useState(null);
     const [posY , setPosY] = useState(null);
 
-    const setPos = (x, y) => {
-        setPosX(Math.floor(x / pixelBoard.pixelSize))
-        setPosY(Math.floor(y / pixelBoard.pixelSize))
+    let setPos = (x, y) => {
+        setPosX(Math.floor(x / pixelW))
+        setPosY(Math.floor(y / pixelW))
     }
 
-	const initDraw = useCallback((ctx) => {
-        const canvas = canvasRef.current;
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-        pixelBoard.board.forEach((pixel, rowIndex) => {
-            drawPixel(ctx,rowIndex, pixel)
-        })
-	}, []);
+    const changePixelW = (e) => {
+        setPixelW(parseInt(e.target.value));
+    }
 
-	useEffect(() => {
-		const canvas = canvasRef.current;
-		const context = canvas.getContext('2d');
-		// tricks to get high resolution canvas
-		canvas.width = pixelBoard.width * pixelBoard.pixelSize;
-		canvas.height = pixelBoard.height * pixelBoard.pixelSize;
-		canvas.style.width = `${pixelBoard.width * pixelBoard.pixelSize}px`;
-		canvas.style.height = `${pixelBoard.height * pixelBoard.pixelSize}px`;
-		// end tricks
-		initDraw(context);
-	}, [initDraw]);
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        const context = canvas.getContext('2d');
-        initDraw(context);
-        (posX !== null && posY !== null) && drawSelecionnedPixel(context, posX, posY);
-    }, [posX, posY]);
-
-    const mouseDraw = (e) => {
-        const canvas = canvasRef.current;
+    const mouseDetect = (e) => {
+        const canvas = canvasRef.current
         const rect = canvas.getBoundingClientRect()
-        const x = Math.floor((e.clientX - rect.left) / pixelBoard.pixelSize)
-        const y = Math.floor((e.clientY - rect.top) / pixelBoard.pixelSize)
-        const context = canvas.getContext('2d')
-        console.log(x, y)
-        drawPixel(context, x + y * pixelBoard.width , colorState)
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+        setPos(x, y)
     };
 
-	useEffect(() => {
+    useEffect(() => {
         const canvas = canvasRef.current
 		const resize = () => {
 			console.log('resize');
 		};
-
-        const mouseDetect = (e) => {
-            const rect = canvas.getBoundingClientRect()
-            const x = e.clientX - rect.left
-            const y = e.clientY - rect.top
-            setPos(x, y)
-        };
         
         const mouseExit = () => {
             setPosX(null)
@@ -76,40 +51,76 @@ const PixelBoard = ({pixelBoard, colorState}) => {
 		return () => {
 			canvas.removeEventListener('mousemove',mouseDetect);
             canvas.removeEventListener('mouseout', mouseExit);
-            canvas.removeEventListener('mouseclick', mouseDraw);
+            canvas.removeEventListener('click', mouseDraw);
 			window.removeEventListener('resize', resize);
 		};
 	}, []);
 
-    const drawSquare = () => {
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        canvas.removeEventListener('mousemove',mouseDetect);
+        canvas.addEventListener('mousemove', mouseDetect);
+        getPixelBoard(params.id).then((pixelBoard) => {
+            redrawPixels(pixelBoard,canvas);
+        })
+    }, [posX, posY, pixelW])
+
+    const redrawPixels = (board, canvas) => {
+        const ctx = canvas.getContext('2d');
+        canvas.width = board.width * pixelW;
+        canvas.height = board.height * pixelW;
+        canvas.style.width = `${board.width * pixelW}px`;
+		canvas.style.height = `${board.height * pixelW}px`;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        (posX !== null && posY !== null) && drawSelecionnedPixel(ctx);
+        board.pixelsView.forEach((element,index) => {
+            if(element){
+                drawPixel(ctx, index, element, board.width);
+            }
+        });
+    }
+
+    useEffect(() => {
         const canvas = canvasRef.current
-        const ctx = canvas.getContext('2d')
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-        ctx.fillStyle = 'red'
-        ctx.fillRect(0, 0, 100, 100)
+        canvas.removeEventListener('click', mouseDraw);
+        canvas.addEventListener('click', mouseDraw);
+    }, [colorState])
+
+
+
+    const mouseDraw = (e) => {
+        console.log(colorState);
+    };
+
+    const drawSelecionnedPixel = (ctx) => {
+        ctx.strokeStyle = colorState
+        console.log(posX, posY, pixelW);
+        ctx.strokeRect(posX * pixelW, posY * pixelW, pixelW, pixelW);
     }
 
-    const drawSelecionnedPixel = (ctx, x, y) => {
-        ctx.strokeStyle = 'red'
-        ctx.strokeRect(x * pixelBoard.pixelSize, y * pixelBoard.pixelSize, pixelBoard.pixelSize, pixelBoard.pixelSize);
-    }
-
-    const drawPixel = (ctx, indexPx, color) => {
+    const drawPixel = (ctx, indexPx, color,pbw) => {
         if(color) {
-            let x = (indexPx  % (pixelBoard.width))
-            let y = Math.floor(indexPx /pixelBoard.width)
+            let x = (indexPx  % (pbw))
+            let y = Math.floor(indexPx /pbw)
             ctx.fillStyle = color;
-            ctx.fillRect(x * pixelBoard.pixelSize, y * pixelBoard.pixelSize, pixelBoard.pixelSize, pixelBoard.pixelSize);
-            
+            ctx.fillRect(x * pixelW, y * pixelW, pixelW, pixelW);
         }
     }
 
 	return (
-		<div className="canvas">
-            <canvas ref={canvasRef}></canvas>
-            <button onClick={drawSquare}>Draw Square</button>
-            <button onClick={() => initDraw(canvasRef.current.getContext('2d'))}>Draw Pixel</button>
+        <div>
+        <div className="canvas">
+            <canvas ref={canvasRef} style={{ border : '2px solid black'}}></canvas>
+        </div>
+        <div>
+            <FormGroup>
+                <Label for="pixelSize">
+                    Taille d'un pixel {pixelW} px
+                </Label>
+                <Input name='pixelSize' type="range" min="5" max="50" step="5" aria-label="pixelSize" value={pixelW} onChange={changePixelW} />
+            </FormGroup>
             {(posX != null & posY != null) && <p> x : {posX} y : {posY}</p>}
+        </div>
         </div>
 	);
 };

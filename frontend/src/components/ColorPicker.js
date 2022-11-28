@@ -9,7 +9,7 @@ const colors = [
 
 const ColorPicker = ({ colorState, setColor}) => {
      
-     return (<div className='colorPicker'>
+     return (<div className='colorPicker bg-light'>
         <h3>Choisir une couleur</h3>
         <div className='colors'>
             {colors.map((color) => <ColorBox key={color} color={color} colorState={colorState} setColor={setColor}/>)}

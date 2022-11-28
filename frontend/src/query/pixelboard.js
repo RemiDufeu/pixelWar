@@ -41,9 +41,6 @@ export const getAllActifsBoards = async () => {
     }
 };
 
-export const getBoard = async (id) => {
-//todo
-};
 
 export const createBoard = async (board) => {
     const resp = await fetch(`${REACT_APP_API_URL}${PIXELBOARD_API_PATH}`,
