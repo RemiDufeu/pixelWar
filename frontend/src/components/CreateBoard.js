@@ -17,6 +17,7 @@ const CreateBoard = () => {
         e.preventDefault();
         const formDatas = new FormData(e.target);
         const data = Object.fromEntries(formDatas.entries());
+        data.isPublic = data.isPublic === "on" ? true : false;
         setStep('loading');
         createBoard(data).then((res) => {
             setStep('success');

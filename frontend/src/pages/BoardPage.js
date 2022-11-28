@@ -63,7 +63,7 @@ const BoardPage = () => {
       };
       return (<>
         <TopBar/>
-        <h1>{board.name}</h1>
+        <h1>{board && board.name}</h1>
         <div className="container flexBetween">
             <div>BoardPage color : {color}</div>
           <PixelBoard pixelBoard={pixelBoard} colorState={color}/>
