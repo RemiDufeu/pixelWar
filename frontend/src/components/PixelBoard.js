@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FormGroup, Input, Label } from 'reactstrap';
+import { Alert, FormGroup, Input, Label } from 'reactstrap';
 import { getPixelBoard, putPixel } from '../query/pixelboard';
 
 const PixelBoard = ({colorState}) => {
@@ -13,8 +13,13 @@ const PixelBoard = ({colorState}) => {
 
     const [posX , setPosX] = useState(null);
     const [posY , setPosY] = useState(null);
+    const [error, setError] = useState(null);
 
     const [pixelBoard, setPixelBoard] = useState(null);
+
+    const deleteError = () => {
+        setError(null);
+    }
 
     let setPos = (x, y) => {
         setPosX(Math.floor(x / pixelW))
@@ -104,16 +109,17 @@ const PixelBoard = ({colorState}) => {
                 redrawPixels(res, canvas);
             })
         })
+        .catch((error) => {
+            setError(error.message);
+        });
     };
 
     const drawSelecionnedPixel = (ctx) => {
         ctx.strokeStyle = colorState
-        console.log(posX, posY, pixelW);
         ctx.strokeRect(posX * pixelW, posY * pixelW, pixelW, pixelW);
     }
 
     const drawPixel = (ctx, indexPx, color,pbw) => {
-        console.log(indexPx, color, pbw);
         let x = (indexPx  % (pbw))
         let y = Math.floor(indexPx /pbw)
         ctx.fillStyle = color;
@@ -122,6 +128,7 @@ const PixelBoard = ({colorState}) => {
 
 	return (
         <div style={{ overflow : 'scroll', maxHeight : '100vh'}}>
+            <Alert color="danger" style={{margin : '100px 20px', position : 'absolute', right : '50%', zIndex : 1}} isOpen={error} toggle={deleteError}>{error}</Alert>
             <FormGroup>
                 <Label for="pixelSize">
                     Taille d'un pixel {pixelW} px

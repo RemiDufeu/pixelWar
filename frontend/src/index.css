@@ -29,6 +29,12 @@ code {
   border : 2px solid black
 }
 
+.flexBetween {
+  display: flex;
+  justify-content: space-between;
+  padding:  25px 0;
+}
+
 @media (max-width: 1200px) {
   .grid4 {
     grid-template-columns: repeat(3, 1fr);

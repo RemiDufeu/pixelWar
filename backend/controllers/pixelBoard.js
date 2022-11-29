@@ -48,10 +48,23 @@ exports.putPixel = (req, res, next) => {
     PixelBoard.findOne({ _id: req.params.id })
         .then(pixelBoard => {
             let indexPx = req.body.x + (req.body.y * pixelBoard.width)
-            if(pixelBoard.pixelsView[indexPx] != null){
+
+            if(pixelBoard.status !== 'actif') {
+                return res.status(400).json({error : 'PixelBoard non actif'})
+            }
+
+            if(pixelBoard.dateFin < Date.now()) {
+                return res.status(400).json({error : 'Date de fin passée'})
+            }
+
+            if(pixelBoard.pixelsView[indexPx] != null && pixelBoard.mode === 'onePixel'){
                 res.status(400).json({error : "Pixel déjà pris"})
             } else {
                 pixelBoard.pixelsView[indexPx] = req.body.color
+                // si on est en mode onePixel, on met à jour le status du pixelBoard quand tous les pixels sont pris
+                if (pixelBoard.mode === 'onePixel' && pixelBoard.pixelsView.filter(p => p == null).length === 0) {
+                    pixelBoard.status = 'inactif'
+                }
                 pixelBoard.save()
                     .then(() => res.status(200).json({message : "Pixel mis à jour"}))
                     .catch(error => res.status(400).json({error}))

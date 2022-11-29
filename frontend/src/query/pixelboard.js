@@ -76,17 +76,22 @@ export const getPixelBoard = async (id) => {
 
 export const putPixel = async (id, color, x, y) => {
 	const resp = await fetch(`${REACT_APP_API_URL}${PIXELBOARD_API_PATH}/pixel/${id}`,
-		{
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${localStorage.getItem('token')}`,
-			},
-			body: JSON.stringify({ color, x, y }),
-		});
-	if (resp.ok) {
-		return resp.json();
+	{
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${localStorage.getItem('token')}`,
+		},
+		body: JSON.stringify({ color, x, y }),
+	});
+	if (!resp.ok){
+		try {
+			const error = await resp.json();
+			throw new Error(error.error);
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	} else {
-        throw resp.json();
-    }
+		return resp.json();
+	}
 }
