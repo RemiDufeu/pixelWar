@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FormGroup, Input, Label } from 'reactstrap';
-import { getPixelBoard } from '../query/pixelboard';
+import { getPixelBoard, putPixel } from '../query/pixelboard';
 
 const PixelBoard = ({colorState}) => {
 
@@ -49,19 +49,16 @@ const PixelBoard = ({colorState}) => {
 		window.addEventListener('resize',resize);
         canvas.addEventListener('mousemove', mouseDetect);
         canvas.addEventListener('mouseout', mouseExit);
-        canvas.addEventListener('click', mouseDraw);
             
 		
 		return () => {
 			canvas.removeEventListener('mousemove',mouseDetect);
             canvas.removeEventListener('mouseout', mouseExit);
-            canvas.removeEventListener('click', mouseDraw);
 			window.removeEventListener('resize', resize);
 		};
 	}, [posX, posY, pixelW]);
 
     useEffect(() => {
-        
         const canvas = canvasRef.current;
         canvas.removeEventListener('mousemove',mouseDetect);
         canvas.addEventListener('mousemove', mouseDetect);
@@ -89,14 +86,24 @@ const PixelBoard = ({colorState}) => {
 
     useEffect(() => {
         const canvas = canvasRef.current
-        canvas.removeEventListener('click', mouseDraw);
         canvas.addEventListener('click', mouseDraw);
-    }, [colorState])
+        return () => {
+            canvas.removeEventListener('click', mouseDraw);
+        }
+    }, [colorState, posX, posY])
 
 
 
     const mouseDraw = (e) => {
-        console.log(colorState);
+        const canvas = canvasRef.current
+        putPixel(params.id,colorState, posX, posY)
+        .then((res) => {
+            getPixelBoard(params.id)
+            .then((res) => {
+                setPixelBoard(res);
+                redrawPixels(res, canvas);
+            })
+        })
     };
 
     const drawSelecionnedPixel = (ctx) => {
@@ -106,27 +113,23 @@ const PixelBoard = ({colorState}) => {
     }
 
     const drawPixel = (ctx, indexPx, color,pbw) => {
-        if(color) {
-            let x = (indexPx  % (pbw))
-            let y = Math.floor(indexPx /pbw)
-            ctx.fillStyle = color;
-            ctx.fillRect(x * pixelW, y * pixelW, pixelW, pixelW);
-        }
+        console.log(indexPx, color, pbw);
+        let x = (indexPx  % (pbw))
+        let y = Math.floor(indexPx /pbw)
+        ctx.fillStyle = color;
+        ctx.fillRect(x * pixelW, y * pixelW, pixelW, pixelW);
     }
 
 	return (
         <div>
+        <FormGroup>
+            <Label for="pixelSize">
+                Taille d'un pixel {pixelW} px
+            </Label>
+        <Input name='pixelSize' type="range" min="5" max="50" step="5" aria-label="pixelSize" value={pixelW} onChange={changePixelW} />
+        </FormGroup>
         <div className="canvas">
             <canvas ref={canvasRef} style={{ border : '2px solid black'}}></canvas>
-        </div>
-        <div>
-            <FormGroup>
-                <Label for="pixelSize">
-                    Taille d'un pixel {pixelW} px
-                </Label>
-                <Input name='pixelSize' type="range" min="5" max="50" step="5" aria-label="pixelSize" value={pixelW} onChange={changePixelW} />
-            </FormGroup>
-            {(posX != null & posY != null) && <p> x : {posX} y : {posY}</p>}
         </div>
         </div>
 	);
