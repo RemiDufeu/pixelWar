@@ -10,7 +10,6 @@ const Formsignup = ({redirectUrl = "/SignIn"}) => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [email, setEmail] = useState("");
   const [prenom, setPrenom] = useState("");
-  const [errormessage, setError] = useState(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -26,22 +25,14 @@ const Formsignup = ({redirectUrl = "/SignIn"}) => {
       setLoading(false);
     }
     ).catch((e) => {
-      setError(e.message);
       console.log(e);
       setLoading(false);
     });
       
   }
 
-  let err = null;
-  if (errormessage) {
-    err =  <p style={{color: "red"}}>{errormessage}</p>;
-  }
-
-
   return (
     <Container style={{ marginTop: "80px" }}>
-    {err}
     <Form>
     SignUp
         <FormGroup floating>

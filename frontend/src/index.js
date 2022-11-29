@@ -17,6 +17,7 @@ import SignUp from './pages/SignUpPage';
 import AdminPage from './pages/AdminPage';
 import UserDetails from './pages/UserPage';
 import Logout from './components/Logout';
+import UserUpdateDetails from "./pages/UserUpdatePage";
 
 
 const router = createBrowserRouter([
@@ -42,6 +43,9 @@ const router = createBrowserRouter([
 	}, {
 		path : '/Logout',
 		element : <Logout />,
+	}, {
+		path : '/UserUpdateDetails/:id',
+		element : <UserUpdateDetails />,
 	}
 
   ]);
