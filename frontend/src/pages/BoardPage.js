@@ -24,59 +24,15 @@ const BoardPage = () => {
       });
     }, []);
 
-
-
-    const pixelBoard = {
-        width: 16,
-        height: 16,
-        pixelSize: 50,
-        board : [
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue',
-            '','red','','','blue','','','blue'
-        ],
-      };
       return (<>
         <TopBar/>
-        <div>
+        
         <Container>
           <h1>{board && board.name}</h1>
         </Container>
-        <div className="flexBetween">
-          <div style={{margin : '0 auto'}}>
-            <PixelBoard pixelBoard={pixelBoard} colorState={color}/>
-          </div>
+        <div className="gridMax">
+          <PixelBoard colorState={color}/>
           <ColorPicker colorState={color} setColor={setColor}/>
-        </div>
         </div>
       </>);
 }

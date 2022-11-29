@@ -73,3 +73,20 @@ export const getPixelBoard = async (id) => {
         throw resp.json();
     }
 };
+
+export const putPixel = async (id, color, x, y) => {
+	const resp = await fetch(`${REACT_APP_API_URL}${PIXELBOARD_API_PATH}/pixel/${id}`,
+		{
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
+			},
+			body: JSON.stringify({ color, x, y }),
+		});
+	if (resp.ok) {
+		return resp.json();
+	} else {
+        throw resp.json();
+    }
+}

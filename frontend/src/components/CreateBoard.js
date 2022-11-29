@@ -35,11 +35,11 @@ const CreateBoard = () => {
                     <Label for="name">Titre</Label>
                 </FormGroup>
                 <FormGroup floating>
-                    <Input type="number" min="10" step="1" max="500" placeholder="Largeur" name='width' aria-label="width" required/>
+                    <Input type="number" min="10" step="1" max="250" placeholder="Largeur" name='width' aria-label="width" required/>
                     <Label for="width">Largeur</Label>
                 </FormGroup>
                 <FormGroup floating>
-                    <Input type="number" min="10" step="1" max="500" placeholder="Hauteur" aria-label="height" name='height' required/>
+                    <Input type="number" min="10" step="1" max="250" placeholder="Hauteur" aria-label="height" name='height' required/>
                     <Label for="height">Hauteur</Label>
                 </FormGroup>
                 <FormGroup check>

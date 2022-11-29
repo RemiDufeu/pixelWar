@@ -38,20 +38,24 @@ exports.getAllActif = (req, res, next) => {
         .catch(error => res.status(400).json({error}))
 };
 
-exports.getOnePublic = (req, res, next) => {
-    PixelBoard.findOne({ _id: req.params.id })
-        .then(pixelBoard => {
-            if(!pixelBoard.isPublic){
-                next()
-            } else {
-                res.status(200).json(pixelBoard)
-            }
-        })
-        .catch(error => res.status(404).json({error}))
-}
-
 exports.getOne = (req, res, next) => {
     PixelBoard.findOne({ _id: req.params.id })
         .then(pixelBoard => res.status(200).json(pixelBoard))
         .catch(error => res.status(404).json({error}))
 }
+
+exports.putPixel = (req, res, next) => {
+    PixelBoard.findOne({ _id: req.params.id })
+        .then(pixelBoard => {
+            let indexPx = req.body.x + (req.body.y * pixelBoard.width)
+            if(pixelBoard.pixelsView[indexPx] != null){
+                res.status(400).json({error : "Pixel déjà pris"})
+            } else {
+                pixelBoard.pixelsView[indexPx] = req.body.color
+                pixelBoard.save()
+                    .then(() => res.status(200).json({message : "Pixel mis à jour"}))
+                    .catch(error => res.status(400).json({error}))
+            }
+        })
+        .catch(error => res.status(404).json({error}))
+}           

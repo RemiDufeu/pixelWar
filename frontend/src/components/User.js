@@ -9,14 +9,6 @@ import { getUser } from '../query/user';
  const User = () => {
     const params = useParams();
     console.log(params)
-	/*const [id, setId] = useState([]);
-// temporairement jusqu'a trouver un moyen de faire passer l'id depuis topbar
-    useEffect(() => {
-    const id= JSON.parse(localStorage.getItem('id'));
-    if (id) {
-        setId(id);
-    }
-    }, []);*/
 
 	const [user, setUser] = useState([]);
 	useEffect(() => {

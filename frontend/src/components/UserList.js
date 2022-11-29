@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 import React, { useEffect, useState } from 'react';
 import { Table, Button, UncontrolledDropdown, DropdownItem, ButtonGroup, DropdownToggle, DropdownMenu } from 'reactstrap';
-import { getAllUsers } from '../query/user';
+import { getAllUsers, deleteUser} from '../query/user';
 // import PropTypes from 'prop-types';
 
 export const UserList = () => {
@@ -31,25 +31,13 @@ export const UserList = () => {
                         <td>{u.role}</td>
                         <td>
                             <ButtonGroup>
-                                <Button color="primary">
+                                <Button color="primary" href={"/UserSuperUpdateDetails/" + u._id}>
                                     Edit
                                 </Button>
-                                <ButtonGroup>
-                                    <UncontrolledDropdown>
-                                    <DropdownToggle caret color="primary">
-                                        Role
-                                    </DropdownToggle>
-                                    <DropdownMenu>
-                                        <DropdownItem onClick={() => {}}>
-                                        User
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                        Admin
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                    </UncontrolledDropdown>
-                                </ButtonGroup>
-                                <Button color="danger">
+                                <Button color="danger" onClick={() => {
+                                    deleteUser(u._id);
+                                    window.location.reload();
+                                }}>
                                     Delete
                                 </Button>
                                 </ButtonGroup>

@@ -3,8 +3,9 @@
 const { REACT_APP_API_URL } = process.env;
 const USER_API_PATH = '/auth';
 const USER_ALL = '/all';
-//Tempo
 const USER = '/user';
+const USER_UPDATE_PATH = '/userUpdate';
+const USER_UPDATE_ROLE_PATH = '/role';
 const USER_SIGNUP_PATH = '/signUp';
 const USER_LOGIN_PATH = '/signIn';
 const USER_LOGIN_TOKEN_PATH = '/signInToken';
@@ -58,6 +59,7 @@ export const getUser = async (id) => {
 		
 	if (resp.ok) {
 		console.log("OOKKKKKKKK RESPONSE");
+		console.log(resp);
 		return resp.json();
 	}
 	if (!resp.ok){
@@ -70,6 +72,36 @@ export const getUser = async (id) => {
 	}
 };
 
+export const updateUser = async (id,email,nom,prenom) => {
+	const body = JSON.stringify({
+		email,
+		nom,
+		prenom
+	});
+	const resp = await fetch(`${REACT_APP_API_URL}${USER_API_PATH}${USER_UPDATE_PATH}/${id}`,
+		{
+			method: 'PATCH',
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
+				'Content-Type': 'application/json'
+			},
+			params:id,
+			body:body
+		}
+	);
+
+	if (resp.ok) {
+		return resp.json();
+	}
+	if (!resp.ok){
+		try {
+			const error = await resp.json();
+			throw new Error(error.error);
+		} catch (e) {
+			throw new Error(e.message);
+		}
+	}
+};
 export const postUser = async (nom, prenom, password, passwordConfirm, email) => {
 	console.log(`${REACT_APP_API_URL}${USER_API_PATH}${USER_SIGNUP_PATH}`);
 	const body = JSON.stringify({
@@ -85,9 +117,7 @@ export const postUser = async (nom, prenom, password, passwordConfirm, email) =>
 			headers: {
 				'Content-Type': 'application/json',
 			},
-		
 			body: body,
-
 		});
 	
 	if (!resp.ok){
@@ -155,5 +185,63 @@ export const loginTokenUser = async (token) => {
 			throw new Error(e.message);
 		}
 		
+	}
+}
+
+export const updateRole = async (id,role) => {
+	const body = JSON.stringify({
+		role
+	});
+	const resp = await fetch(`${REACT_APP_API_URL}${USER_API_PATH}${USER_UPDATE_ROLE_PATH}/${id}`,
+		{
+			method: 'PATCH',
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
+				'Content-Type': 'application/json'
+			},
+			params:id,
+			body:body
+		}
+	);
+
+	console.log("RESPONSE"+resp);
+	console.log("RESPONSE"+resp.ok);
+	console.log("RESPONSE"+resp.status);
+	if (resp.ok) {
+		return resp.json();
+	}
+	if (!resp.ok){
+		try {
+			const error = await resp.json();
+			throw new Error(error.error);
+		} catch (e) {
+			throw new Error(e.message);
+		}
+	}
+};
+
+export const deleteUser = async (id) => {
+	const resp = await fetch(`${REACT_APP_API_URL}${USER_API_PATH}/${id}`,
+		{
+			method: 'DELETE',
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
+				'Content-Type': 'application/json'
+			},
+			params:id
+		}
+	);
+
+	if (resp.ok) {
+		console.log("SUPPRESSION OK");
+		return resp.json();
+	}
+	if (!resp.ok){
+		try {
+			const error = await resp.json();
+			throw new Error(error.error);
+		} catch (e) {
+			throw new Error(e.message);
+		}
 	}
 }

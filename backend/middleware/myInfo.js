@@ -14,7 +14,7 @@ module.exports = (req, res, next) => {
         const decodedToken = jwt.verify(token, process.env.JWTCRYPT)
         const userId = decodedToken.userId;
 
-        if(req.params.id !== userId) {
+        if(req.params.id !== userId &&  'admin' !== decodedToken.userRole) {
             throw "L'utilsateur n'a pas accès à cette ressource"
         }
 

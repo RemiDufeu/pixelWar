@@ -5,7 +5,7 @@ import TopBar from '../components/Topbar';
 import { UserList } from '../components/UserList';
 import { useRequireRole } from '../lib/useRole';
 
-const AdminPage = () => {
+const AdminUserListPage = () => {
 
     const [loading, userRole] = useRequireRole(['admin']);
 
@@ -22,4 +22,4 @@ const AdminPage = () => {
   )
 }
 
-export default AdminPage
+export default AdminUserListPage

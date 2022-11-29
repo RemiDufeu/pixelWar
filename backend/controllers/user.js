@@ -91,9 +91,13 @@ exports.getUser = (req, res, next) => {
         .then(user => res.status(200).json({ message: 'Objet trouvé', data: user }))
         .catch(error => res.status(400).json({ error }))
 }
-
+exports.updateUser = (req, res, next) => {
+    User.updateOne({ _id: req.params.id }, {email:req.body.email,nom:req.body.nom,prenom:req.body.prenom})
+        .then(() => res.status(200).json({ message: 'User modifié !' }))
+        .catch(error => res.status(400).json({ error }));
+}
 exports.updateRole = (req, res, next) => {
-    User.updateOne({ _id: req.params.id }, { role : req.query.role })
+    User.updateOne({ _id: req.params.id }, { role : req.body.role })
         .then(() => res.status(200).json({ message: 'Objet modifié !' }))
         .catch(error => res.status(400).json({ error }));
 }
