@@ -32,17 +32,14 @@ const Formsignup = ({redirectUrl = "/SignIn"}) => {
     });
       
   }
-
   let err = null;
   if (errormessage) {
     err =  <p style={{color: "red"}}>{errormessage}</p>;
   }
-
-
   return (
     <Container style={{ marginTop: "80px" }}>
-    {err}
-    <Form>
+      {err}
+      <Form>
     SignUp
         <FormGroup floating>
         <Input

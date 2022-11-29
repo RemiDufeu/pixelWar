@@ -12,6 +12,7 @@ router.post('/signInToken', userCtrl.signInToken)
 router.put('/role/:id', admin, userCtrl.updateRole)
 router.get('/all', admin,userCtrl.getUsers)
 router.get('/user/:id',myInfo,userCtrl.getUser)
+router.patch('/userUpdate/:id',myInfo,userCtrl.updateUser)
 router.delete('/:id', admin, userCtrl.deleteUser)
 
 module.exports = router
