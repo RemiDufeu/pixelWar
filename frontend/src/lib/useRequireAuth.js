@@ -26,5 +26,4 @@ function useRequireAuth(redirectUrl = "/SignIn") {
   }, []);
   return loading;
 }
-
 export { useRequireAuth };

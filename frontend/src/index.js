@@ -17,6 +17,7 @@ import SignUp from './pages/SignUpPage';
 import AdminPage from './pages/AdminPage';
 import UserDetails from './pages/UserPage';
 import Logout from './components/Logout';
+import { UserList } from './components/UserList';
 
 
 const router = createBrowserRouter([
@@ -42,7 +43,11 @@ const router = createBrowserRouter([
 	}, {
 		path : '/Logout',
 		element : <Logout />,
+	}, {
+		path : '/UserList',
+		element : <UserList />,
 	}
+
 
   ]);
 
