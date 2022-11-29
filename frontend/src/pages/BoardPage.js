@@ -26,16 +26,13 @@ const BoardPage = () => {
 
       return (<>
         <TopBar/>
-        <div>
+        
         <Container>
           <h1>{board && board.name}</h1>
         </Container>
-        <div className="flexBetween">
-          <div style={{margin : '0 auto'}}>
-            <PixelBoard colorState={color}/>
-          </div>
+        <div className="gridMax">
+          <PixelBoard colorState={color}/>
           <ColorPicker colorState={color} setColor={setColor}/>
-        </div>
         </div>
       </>);
 }

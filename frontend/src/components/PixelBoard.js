@@ -121,16 +121,14 @@ const PixelBoard = ({colorState}) => {
     }
 
 	return (
-        <div>
-        <FormGroup>
-            <Label for="pixelSize">
-                Taille d'un pixel {pixelW} px
-            </Label>
-        <Input name='pixelSize' type="range" min="5" max="50" step="5" aria-label="pixelSize" value={pixelW} onChange={changePixelW} />
-        </FormGroup>
-        <div className="canvas">
+        <div style={{ overflow : 'scroll', maxHeight : '100vh'}}>
+            <FormGroup>
+                <Label for="pixelSize">
+                    Taille d'un pixel {pixelW} px
+                </Label>
+            <Input name='pixelSize' type="range" min="5" max="50" step="5" aria-label="pixelSize" value={pixelW} onChange={changePixelW} />
+            </FormGroup>
             <canvas ref={canvasRef} style={{ border : '2px solid black'}}></canvas>
-        </div>
         </div>
 	);
 };
