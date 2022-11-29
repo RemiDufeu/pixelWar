@@ -26,10 +26,16 @@ const BoardPage = () => {
 
       return (<>
         <TopBar/>
-        
-        <Container>
-          <h1>{board && board.name}</h1>
-        </Container>
+        <div className="bg-light">
+          <Container className="flexBetween">
+            <h1>Titre : {board && board.name}</h1>
+            <div>
+              <h4>Mode de jeu : {board && board.mode}</h4>
+              <h4>Status : {board && board.status}</h4>
+              <h4>Date de fin : {board && new Date(board.dateFin).toLocaleDateString()}</h4>
+            </div>
+          </Container>
+        </div>
         <div className="gridMax">
           <PixelBoard colorState={color}/>
           <ColorPicker colorState={color} setColor={setColor}/>
