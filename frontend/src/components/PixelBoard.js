@@ -14,6 +14,8 @@ const PixelBoard = ({colorState}) => {
     const [posX , setPosX] = useState(null);
     const [posY , setPosY] = useState(null);
 
+    const [pixelBoard, setPixelBoard] = useState(null);
+
     let setPos = (x, y) => {
         setPosX(Math.floor(x / pixelW))
         setPosY(Math.floor(y / pixelW))
@@ -29,7 +31,9 @@ const PixelBoard = ({colorState}) => {
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
         setPos(x, y)
+        redrawPixels(pixelBoard, canvas)
     };
+
 
     useEffect(() => {
         const canvas = canvasRef.current
@@ -54,16 +58,19 @@ const PixelBoard = ({colorState}) => {
             canvas.removeEventListener('click', mouseDraw);
 			window.removeEventListener('resize', resize);
 		};
-	}, []);
+	}, [posX, posY, pixelW]);
 
     useEffect(() => {
+        
         const canvas = canvasRef.current;
         canvas.removeEventListener('mousemove',mouseDetect);
         canvas.addEventListener('mousemove', mouseDetect);
-        getPixelBoard(params.id).then((pixelBoard) => {
-            redrawPixels(pixelBoard,canvas);
+        getPixelBoard(params.id)
+        .then((res) => {
+            setPixelBoard(res);
+            redrawPixels(res, canvas);
         })
-    }, [posX, posY, pixelW])
+    }, [])
 
     const redrawPixels = (board, canvas) => {
         const ctx = canvas.getContext('2d');
