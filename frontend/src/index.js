@@ -18,6 +18,8 @@ import AdminPage from './pages/AdminPage';
 import UserDetails from './pages/UserPage';
 import Logout from './components/Logout';
 import UserUpdateDetails from "./pages/UserUpdatePage";
+import AdminUserListPage from "./pages/AdminUserListPage";
+import UserSuperUpdatePage from "./pages/UserSuperUpdatePage";
 
 
 const router = createBrowserRouter([
@@ -46,6 +48,12 @@ const router = createBrowserRouter([
 	}, {
 		path : '/UserUpdateDetails/:id',
 		element : <UserUpdateDetails />,
+	}, {
+		path : '/UserList',
+		element : <AdminUserListPage />,
+	}, {
+		path : '/UserSuperUpdateDetails/:id',
+		element : <UserSuperUpdatePage />,
 	}
 
 
