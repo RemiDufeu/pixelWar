@@ -8,7 +8,6 @@ const FormUpdate = ({redirectUrl = "/SignIn"}) => {
     const [email, setEmail] = useState("");
     const [nom, setNom] = useState("");
     const [prenom, setPrenom] = useState("");
-    const [errormessage, setError] = useState(null);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const params = useParams();
@@ -32,18 +31,12 @@ const FormUpdate = ({redirectUrl = "/SignIn"}) => {
                 setLoading(false);
             }
         ).catch((e) => {
-            setError(e.message);
             console.log(e);
             setLoading(false);
         });
     }
-    let err = null;
-    if (errormessage) {
-        err =  <p style={{color: "red"}}>{errormessage}</p>;
-    }
     return (
         <Container style={{ marginTop: "80px" }}>
-            {err}
             <Form>
                 Update User
                 <FormGroup floating>
