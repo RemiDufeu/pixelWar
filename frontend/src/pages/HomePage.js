@@ -90,7 +90,7 @@ const HomePage = () => {
 const TabBtn = ({name, tab, index, setTab}) => {
     let color = index !== tab ? 'primary' : 'secondary';
     return (
-        <Button style={{borderRadius:0}} styledisabled={tab == index} onClick={() => setTab(index)} color={color} size="lg">{name}</Button>
+        <Button style={{borderRadius:0}} disabled={tab == index} onClick={() => setTab(index)} color={color} size="lg">{name}</Button>
     )
 }
 
