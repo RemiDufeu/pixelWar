@@ -5,6 +5,7 @@ const USER_API_PATH = '/auth';
 const USER_ALL = '/all';
 const USER = '/user';
 const USER_UPDATE_PATH = '/userUpdate';
+const USER_UPDATE_PASSWORD_PATH = '/passwordUpdate';
 const USER_UPDATE_ROLE_PATH = '/role';
 const USER_SIGNUP_PATH = '/signUp';
 const USER_LOGIN_PATH = '/signIn';
@@ -245,3 +246,36 @@ export const deleteUser = async (id) => {
 		}
 	}
 }
+export const updatePassword = async (id,password,newPassword,passwordConfirm) => {
+	const body = JSON.stringify({
+		password,
+		newPassword,
+		passwordConfirm
+	});
+	const resp = await fetch(`${REACT_APP_API_URL}${USER_API_PATH}${USER_UPDATE_PASSWORD_PATH}/${id}`,
+		{
+			method: 'PATCH',
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
+				'Content-Type': 'application/json'
+			},
+			params:id,
+			body:body
+		}
+	);
+
+	console.log("RESPONSE"+resp);
+	console.log("RESPONSE OK"+resp.ok);
+	console.log("RESPONSE STATUS"+resp.status);
+	if (resp.ok) {
+		return resp.json();
+	}
+	if (!resp.ok){
+		try {
+			const error = await resp.json();
+			throw new Error(error.error);
+		} catch (e) {
+			throw new Error(e.message);
+		}
+	}
+};
