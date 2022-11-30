@@ -14,6 +14,7 @@ router.patch('/passwordUpdate/:id', myInfo, userCtrl.updatePassword)
 router.get('/all', admin,userCtrl.getUsers)
 router.get('/user/:id',myInfo,userCtrl.getUser)
 router.patch('/userUpdate/:id',myInfo,userCtrl.updateUser)
-router.delete('/:id', admin, userCtrl.deleteUser)
+router.delete('/:id', myInfo||admin, userCtrl.deleteUser)
+
 
 module.exports = router

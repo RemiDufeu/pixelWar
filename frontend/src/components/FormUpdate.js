@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {
     Container,
@@ -6,11 +6,10 @@ import {
     FormGroup,
     Label,
     Input,
-    Button, Card, CardHeader, CardBody, CardTitle, CardSubtitle, CardFooter,
+    Button, Card, CardHeader, CardBody, ButtonGroup, CardText,
 } from "reactstrap";
-import {getUser, updatePassword, updateUser} from "../query/user";
+import {deleteUser, getUser, updatePassword, updateUser} from "../query/user";
 import Loading from "./Loading";
-import React from "react";
 
 const FormUpdate = ({redirectUrl = "/SignIn"}) => {
     const [email, setEmail] = useState("");
@@ -20,16 +19,19 @@ const FormUpdate = ({redirectUrl = "/SignIn"}) => {
     const [newPassword, setNewPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [errormessage, setError] = useState(null);
+    const [user, setUser] = useState([]);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [loadingPass, setLoadingPass] = useState(false);
     const params = useParams();
 
+    
     useEffect(() => {
         getUser(params.id).then((json) => {
                 setEmail(json.data.email);
                 setNom(json.data.nom);
                 setPrenom(json.data.prenom);
+                setUser(json.data)
             }
         );
 
@@ -64,7 +66,7 @@ const FormUpdate = ({redirectUrl = "/SignIn"}) => {
     }
     let err = null;
     if (errormessage) {
-        err =  <p style={{color: "red"}}>{errormessage}</p>;
+        err = <p style={{color: "red"}}>{errormessage}</p>;
     }
     return (
         <Container style={{marginTop: "80px"}}>
@@ -76,7 +78,7 @@ const FormUpdate = ({redirectUrl = "/SignIn"}) => {
                     margin: '0 auto',
                     float: 'none',
                     marginBottom: '50px',
-                    boxShadow:'8px 8px 10px 0 rgb(211,211,211)',
+                    boxShadow: '8px 8px 10px 0 rgb(211,211,211)',
 
                 }}>
                 <CardHeader>
@@ -115,7 +117,7 @@ const FormUpdate = ({redirectUrl = "/SignIn"}) => {
                             <Label for="Prenom">Prenom</Label>
                         </FormGroup>
 
-                        {loading ? <Loading></Loading> : <Button onClick={handleUpdate} size="lg" color="primary"
+                        {loading ? <Loading></Loading> : <Button onClick={handleUpdate} color="primary"
                                                                  style={{
                                                                      margin: "auto",
                                                                      height: "30px",
@@ -136,7 +138,7 @@ const FormUpdate = ({redirectUrl = "/SignIn"}) => {
                     margin: '0 auto',
                     float: 'none',
                     marginBottom: '50px',
-                    boxShadow:'8px 8px 10px 0 rgb(211,211,211)',
+                    boxShadow: '8px 8px 10px 0 rgb(211,211,211)',
                 }}>
                 <CardHeader>
                     Password
@@ -175,17 +177,58 @@ const FormUpdate = ({redirectUrl = "/SignIn"}) => {
                             <Label for="passwordConfirm">Password Confirm</Label>
                         </FormGroup>
 
-                        {loadingPass ? <Loading></Loading> : <Button onClick={handleUpdatePassword} size="lg" color="primary"
-                                                                 style={{
-                                                                     margin: "auto",
-                                                                     height: "30px",
-                                                                     display: "flex",
-                                                                     fontSize: "16px",
-                                                                     padding: "0px 10px 0px 10px",
-                                                                     textAlign: "center"
-                                                                 }}>Save changes</Button>}
+                        {loadingPass ? <Loading></Loading> : <Button onClick={handleUpdatePassword} color="primary"
+                                                                     style={{
+                                                                         margin: "auto",
+                                                                         height: "30px",
+                                                                         display: "flex",
+                                                                         fontSize: "16px",
+                                                                         padding: "0px 10px 0px 10px",
+                                                                         textAlign: "center"
+                                                                     }}>Save changes</Button>}
                     </Form>
 
+                </CardBody>
+            </Card>
+
+            <Card
+                color="light"
+                outline
+                style={{
+                    width: '40rem',
+                    margin: '0 auto',
+                    float: 'none',
+                    marginBottom: '50px',
+                    boxShadow: '8px 8px 10px 0 rgb(211,211,211)',
+
+                }}>
+                <CardHeader>
+                    Delete account
+                </CardHeader>
+                <CardBody>
+                    <CardText>
+                        You will lose access to your account once your deletion request has been submitted.
+                    </CardText>
+                    <ButtonGroup>
+                        <Button color="danger" style={{
+                            margin: "auto",
+                            height: "30px",
+                            display: "flex",
+                            fontSize: "16px",
+                            padding: "0px 10px 0px 10px",
+                            textAlign: "center"
+                        }}
+                                onClick={() => {
+                                    deleteUser(user._id).then(r =>
+
+                                        navigate("/Logout")
+                                    )
+
+                                }}>
+                            Delete Account
+                        </Button>
+
+                    </ButtonGroup>
                 </CardBody>
             </Card>
 
