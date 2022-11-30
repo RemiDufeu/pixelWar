@@ -35,6 +35,13 @@ code {
   padding:  25px 0;
 }
 
+.flexAround {
+  display: flex;
+  justify-content: space-around;
+  padding:  25px 0;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 1200px) {
   .grid4 {
     grid-template-columns: repeat(3, 1fr);

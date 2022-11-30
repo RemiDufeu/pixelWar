@@ -1,6 +1,5 @@
-
-
 const PixelBoard = require('../models/PixelBoard')
+const User = require('../models/User')
 
 exports.create = (req, res, next) => {
     
@@ -36,6 +35,17 @@ exports.getAllActif = (req, res, next) => {
     PixelBoard.find({status : 'actif'})
         .then(pixelBoards => res.status(200).json(pixelBoards))
         .catch(error => res.status(400).json({error}))
+};
+
+exports.getAllInfos = async  (req, res, next) => {
+    try {
+        const pixelBoards = await PixelBoard.find()
+        const pixelBoardCount = await PixelBoard.countDocuments({})
+        const userCount = await User.countDocuments({})
+        res.status(200).json({pixelBoards, pixelBoardCount, userCount})
+    } catch (error) {
+        res.status(400).json({error})
+    }
 };
 
 exports.getOne = (req, res, next) => {

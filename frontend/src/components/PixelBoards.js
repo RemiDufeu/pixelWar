@@ -2,22 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Alert, Button, Card, CardBody, CardFooter, CardHeader, CardSubtitle, CardTitle, Container, UncontrolledAlert } from 'reactstrap'
 import { useUser } from '../lib/useUser';
 import { getAllActifsBoards } from '../query/pixelboard';
+import PreviewBoard from './PreviewBoard';
 
-const PixelBoards = () => {
+const PixelBoards = ({pixelBoards, nameTab}) => {
 
-  const [pixelBoards, setPixelBoards] = useState([]);
   const [error, setError] = useState(null);
   const [loading, user ] = useUser();
-
-  useEffect(() => {
-    getAllActifsBoards()
-    .then((res) => {
-      setPixelBoards(res);
-    })
-    .catch((error) => {
-      setError(error);
-    });
-  }, [])
 
 
   const PixelBoard = ({ pixelBoard }) => {
@@ -25,7 +15,8 @@ const PixelBoards = () => {
         <CardHeader>
           mode {pixelBoard.mode}
         </CardHeader>
-        <CardBody>
+        <CardBody style={{textAlign : 'center'}}>
+          <PreviewBoard pixelBoard={pixelBoard} width={200}></PreviewBoard>
           <CardTitle tag="h5">
             {pixelBoard.name}
           </CardTitle>
@@ -45,7 +36,6 @@ const PixelBoards = () => {
 
   return (
     <Container>
-      <h1>PixelBoards</h1>
       { !user && <Alert color="info">Pour accéder à l'ensemble des Pixel Board tu peux créer un compte !</Alert>}
       {error && <UncontrolledAlert color="danger">{error}</UncontrolledAlert>}
       <div className='grid4'>

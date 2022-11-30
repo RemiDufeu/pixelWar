@@ -95,3 +95,21 @@ export const putPixel = async (id, color, x, y) => {
 		return resp.json();
 	}
 }
+
+export const getPublicStats = async () => {
+	const resp = await fetch(`${REACT_APP_API_URL}${PIXELBOARD_API_PATH}/public/stats`,
+		{
+			method: 'GET',
+		}
+	);
+	if (!resp.ok){
+		try {
+			const error = await resp.json();
+			throw new Error(error.error);
+		} catch (e) {
+			throw new Error(e.message);
+		}
+	} else {
+		return resp.json();
+	}
+};
