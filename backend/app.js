@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/user')
 const pixelBoardRoutes = require('./routes/pixelBoard')
+const pixelRoutes = require('./routes/pixel')
 
 require('dotenv').config();
 
@@ -23,7 +24,7 @@ app.use((req, res, next) => {
 );
 
 app.use(bodyParser.json())
-
+app.use('/api/pixel', pixelRoutes)
 app.use('/api/pixelboard', pixelBoardRoutes)
 app.use('/api/auth', userRoutes)
 

@@ -1,5 +1,6 @@
 const PixelBoard = require('../models/PixelBoard')
 const User = require('../models/User')
+const Pixel = require("../models/Pixel");
 
 exports.create = (req, res, next) => {
     
@@ -57,7 +58,24 @@ exports.getOne = (req, res, next) => {
 exports.putPixel = (req, res, next) => {
     PixelBoard.findOne({ _id: req.params.id })
         .then(pixelBoard => {
-            let indexPx = req.body.x + (req.body.y * pixelBoard.width)
+
+            const pixel = new Pixel({
+                x: req.body.x,
+                y: req.body.y,
+                color: req.body.color,
+                creator: req.auth,
+                board:req.params.id
+            })
+            pixel.save()
+                .catch(error => res.status(400).json({error}))
+
+            console.log("PIXEL "+pixel)
+                /*.then(() => res.status(201).json({ message : "Pixel créé !"}))
+                .catch(error => res.status(400).json({error}))*/
+
+            let indexPx = pixel.x + (pixel.y * pixelBoard.width)
+            console.log("Index "+indexPx)
+
 
             if(pixelBoard.status !== 'actif') {
                 return res.status(400).json({error : 'PixelBoard non actif'})
@@ -70,7 +88,7 @@ exports.putPixel = (req, res, next) => {
             if(pixelBoard.pixelsView[indexPx] != null && pixelBoard.mode === 'onePixel'){
                 res.status(400).json({error : "Pixel déjà pris"})
             } else {
-                pixelBoard.pixelsView[indexPx] = req.body.color
+                pixelBoard.pixelsView[indexPx] = pixel.color
                 // si on est en mode onePixel, on met à jour le status du pixelBoard quand tous les pixels sont pris
                 if (pixelBoard.mode === 'onePixel' && pixelBoard.pixelsView.filter(p => p == null).length === 0) {
                     pixelBoard.status = 'inactif'
@@ -81,4 +99,4 @@ exports.putPixel = (req, res, next) => {
             }
         })
         .catch(error => res.status(404).json({error}))
-}           
+}
