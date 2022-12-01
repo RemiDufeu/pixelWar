@@ -68,14 +68,9 @@ exports.putPixel = (req, res, next) => {
             })
             pixel.save()
                 .catch(error => res.status(400).json({error}))
-
-            console.log("PIXEL "+pixel)
-                /*.then(() => res.status(201).json({ message : "Pixel créé !"}))
-                .catch(error => res.status(400).json({error}))*/
+            console.log("Pixel: "+pixel)
 
             let indexPx = pixel.x + (pixel.y * pixelBoard.width)
-            console.log("Index "+indexPx)
-
 
             if(pixelBoard.status !== 'actif') {
                 return res.status(400).json({error : 'PixelBoard non actif'})

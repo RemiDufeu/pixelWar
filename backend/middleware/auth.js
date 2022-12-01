@@ -4,7 +4,8 @@ require('dotenv').config();
 module.exports = (req, res, next) => {
     try {
 
-        if (req.headers.authorization === undefined) {
+        const tokenRaw = req.headers.authorization.split(' ')[1];
+        if (tokenRaw=="null") {
             req.auth = null
         } else {
             const tokenRaw = req.headers.authorization.split(' ')[1];
