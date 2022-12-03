@@ -11,7 +11,7 @@ export const UserList = () => {
 	}, []);
 
 	return (
-		<Table striped>
+		<Table>
 			<thead>
                 <tr>
                     <th>Id</th>

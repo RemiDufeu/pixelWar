@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -9,7 +9,7 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
-
+import { keepTheme } from './theme/theme';
 import BoardPage from './pages/BoardPage';
 import HomePage from './pages/HomePage';
 import SignIn from './pages/SignInPage';
@@ -58,12 +58,20 @@ const router = createBrowserRouter([
 
 
   ]);
-
+ 
+  function App() {
+	useEffect(() => {
+		keepTheme();
+	})
+  }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+	
 	<React.StrictMode>
 		<RouterProvider router={router}/>
+		<App/>
 	</React.StrictMode>,
+	
 );
 
 // If you want to start measuring performance in your app, pass a function
