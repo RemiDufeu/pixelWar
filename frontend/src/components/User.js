@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {deleteUser, getUser} from '../query/user';
+import { getUser} from '../query/user';
 import {Button, ButtonGroup} from "reactstrap";
 //import { TopBar} from '../components/Topbar';
 
