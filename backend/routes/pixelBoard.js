@@ -13,5 +13,6 @@ router.get('/actif', pixelBoardCtrl.getAllActif)
 router.get('/:id', isPublicBoard,pixelBoardCtrl.getOne)
 router.put('/pixel/:id',isPublicBoard,auth,pixelBoardCtrl.putPixel)
 router.get('/public/stats', pixelBoardCtrl.getAllInfos)
+router.delete('/:id',admin, pixelBoardCtrl.deleteOne)
 
 module.exports = router 

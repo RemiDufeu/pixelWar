@@ -113,3 +113,18 @@ export const getPublicStats = async () => {
 		return resp.json();
 	}
 };
+
+export const deleteBoard = async (id) => {
+	const resp = await fetch(`${REACT_APP_API_URL}${PIXELBOARD_API_PATH}/${id}`,
+		{
+			method: 'DELETE',
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
+			},
+		});
+	if (resp.ok) {
+		return resp.json();
+	} else {
+		throw resp.json();
+	}
+};

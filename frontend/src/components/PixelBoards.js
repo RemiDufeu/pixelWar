@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Alert, Button, Card, CardBody, CardFooter, CardHeader, CardSubtitle, CardTitle, Container, UncontrolledAlert } from 'reactstrap'
 import { useUser } from '../lib/useUser';
-import { getAllActifsBoards } from '../query/pixelboard';
+import { deleteBoard } from '../query/pixelboard';
+import Loading from './Loading';
 import PreviewBoard from './PreviewBoard';
 
 const PixelBoards = ({pixelBoards, nameTab}) => {
-
-  const [error, setError] = useState(null);
   const [loading, user ] = useUser();
+  
+  const [error, setError] = useState(null);
+  
+
+  if (loading)
+    return <Loading></Loading>
 
 
   const PixelBoard = ({ pixelBoard }) => {
@@ -26,6 +31,8 @@ const PixelBoards = ({pixelBoards, nameTab}) => {
             <Button color="primary" href={`/PixelBoard/${pixelBoard._id}`}>Participer</Button> :
             <Button color='secondary' disabled>Privé</Button>
           }
+          {user.userRole === 'admin' && <Button color="danger" onClick={() => deleteBoard(pixelBoard._id).then(() => window.location.reload())}>Supprimer</Button>}
+
         </CardBody>
         <CardFooter>
             {pixelBoard.isPublic ? 'public' : 'privé'}
