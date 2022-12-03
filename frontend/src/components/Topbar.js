@@ -43,7 +43,8 @@ const TopBar = () => {
             <>
                 <Link to="/">Home </Link>
                 <Link to="/PixelBoard">PixelBoard </Link>
-                {user.userRole === 'admin' && <Link to="/Admin">Admin </Link> && <Link to="/UserList">UserList </Link>}
+                {user.userRole === 'admin' && <Link to="/Admin">Admin </Link>}
+                {user.userRole === 'admin' && <Link to="/UserList">UserList </Link>}
                 {user.userRole === 'valideur' && <Link to="/Admin">Todo valideur</Link>}
                 <Link to={"/UserDetails/" + user.userId}>Profile </Link>
                 <Link to="/Logout">Logout</Link>

@@ -59,19 +59,9 @@ exports.putPixel = (req, res, next) => {
     PixelBoard.findOne({ _id: req.params.id })
         .then(pixelBoard => {
 
-            const pixel = new Pixel({
-                x: req.body.x,
-                y: req.body.y,
-                color: req.body.color,
-                creator: req.auth,
-                board:req.params.id
-            })
-            pixel.save()
-                .catch(error => res.status(400).json({error}))
-            console.log("Pixel: "+pixel)
+            // Check if the pixel exists
 
-            let indexPx = pixel.x + (pixel.y * pixelBoard.width)
-
+            let indexPx = req.body.x + (req.body.y * pixelBoard.width)
             if(pixelBoard.status !== 'actif') {
                 return res.status(400).json({error : 'PixelBoard non actif'})
             }
@@ -79,10 +69,26 @@ exports.putPixel = (req, res, next) => {
             if(pixelBoard.dateFin < Date.now()) {
                 return res.status(400).json({error : 'Date de fin passée'})
             }
-
             if(pixelBoard.pixelsView[indexPx] != null && pixelBoard.mode === 'onePixel'){
                 res.status(400).json({error : "Pixel déjà pris"})
             } else {
+                if (pixelBoard.mode == 'infinite') {
+                    if (pixelBoard.pixelsView[indexPx] != null) {
+                        Pixel.deleteOne({ x : req.body.x, y : req.body.y, board : req.params.id })
+                            .catch(error => console.log(error))
+                    }
+
+                }
+                // Create the pixel
+                const pixel = new Pixel({
+                    x: req.body.x,
+                    y: req.body.y,
+                    color: req.body.color,
+                    creator: req.auth,
+                    board:req.params.id
+                })
+                pixel.save()
+                    .catch(error => res.status(400).json({error}))
                 pixelBoard.pixelsView[indexPx] = pixel.color
                 // si on est en mode onePixel, on met à jour le status du pixelBoard quand tous les pixels sont pris
                 if (pixelBoard.mode === 'onePixel' && pixelBoard.pixelsView.filter(p => p == null).length === 0) {
