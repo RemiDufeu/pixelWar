@@ -20,6 +20,7 @@ const TopBar = () => {
                 {user.userRole === 'admin' && <Link to="/UserList">UserList </Link>}
                 {user.userRole === 'valideur' && <Link to="/Admin">Todo valideur</Link>}
                 <Link to={"/UserDetails/" + user.userId}>Profile </Link>
+                <Link to={"/Contributions/" + user.userId}>Contributions </Link>
                 <Link to="/Logout">Logout</Link>
                 <p style={{color: "green"}}>Welcome, You are connected {user.userId}</p>
             </>)

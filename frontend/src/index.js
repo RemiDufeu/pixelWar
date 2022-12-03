@@ -20,6 +20,7 @@ import Logout from './components/Logout';
 import UserUpdateDetails from "./pages/UserUpdatePage";
 import AdminUserListPage from "./pages/AdminUserListPage";
 import UserSuperUpdatePage from "./pages/UserSuperUpdatePage";
+import ContributionPage from "./pages/ContributionsPage";
 
 
 const router = createBrowserRouter([
@@ -54,6 +55,9 @@ const router = createBrowserRouter([
 	}, {
 		path : '/UserSuperUpdateDetails/:id',
 		element : <UserSuperUpdatePage />,
+	}, {
+		path : '/Contributions/:id',
+		element : <ContributionPage />,
 	}
 
 
