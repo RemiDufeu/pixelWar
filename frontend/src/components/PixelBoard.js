@@ -54,8 +54,13 @@ const PixelBoard = ({colorState}) => {
             if (pixelBoard.pixelsView[posX + (posY * pixelBoard.width)] != null) {
                 getUserPixel(params.id, posX, posY)
                     .then((res) => {
-                        setUserNom(res.user.nom)
-                        setUserPrenom(res.user.prenom)
+                        if (res.user !== null) {
+                            setUserNom(res.user.nom)
+                            setUserPrenom(res.user.prenom)
+                        } else {
+                            setUserNom("Anonyme")
+                            setUserPrenom("Anonyme")
+                        }
                         setPixelUpdate(new Date(res.pixel.updatedAt).toLocaleDateString())
                         setTooltipOpen(true)
                     })
