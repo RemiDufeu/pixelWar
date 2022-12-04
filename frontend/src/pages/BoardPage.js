@@ -26,7 +26,7 @@ const BoardPage = () => {
 
       return (<>
         <TopBar/>
-        <h1 className="titleBoardPage">Let's the battle begins</h1>
+        <h1 className="titleBoardPage">Let the Battle begins</h1>
         <div>
         <h1 className="titleBoard">{board && board.name}</h1>
           <Container className="flexBetween">
