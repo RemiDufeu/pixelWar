@@ -5,6 +5,9 @@ import { Input, Form, Container, FormGroup, Label, Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import Loading from "./Loading";
 import { setTheme } from "../theme/theme";
+import { CiUnlock } from "react-icons/ci";
+import {FaUserLock} from "react-icons/fa";
+import React from "react";
 
 const Formsignin = ({ redirectUrl = "/"}) => {
     const [password, setPassword] = useState("");
@@ -46,6 +49,8 @@ const Formsignin = ({ redirectUrl = "/"}) => {
     <div>
     <Container style={{ marginTop: "80px" }}>
     {err}
+        <h2 className="titre" style={{color:'#1562c2'}}><FaUserLock className='icon'/>
+            Sign In</h2>
     <Form>
         <FormGroup floating>
         <Input
@@ -67,7 +72,9 @@ const Formsignin = ({ redirectUrl = "/"}) => {
       />
       <Label for="password">Password</Label>
       </FormGroup>
-    {loading ? <Loading /> : <Button onClick={handlePost} size="lg" color="primary" style={{marginTop: 30,textAlign: "center", margin: "auto", display: "flex"}}>Submit</Button>}
+    {loading ? <Loading /> : <Button onClick={handlePost} color="primary" style={{marginTop: 30,textAlign: "center", margin: "auto", display: "flex"}}>
+        Connect <CiUnlock className='iconbtn'/>
+    </Button>}
     </Form>
     </Container>
     </div>
