@@ -51,7 +51,7 @@ const PixelBoards = ({pixelBoards, nameTab}) => {
 
   return (
     <Container>
-      { !user && <Alert color="info">Pour accéder à l'ensemble des Pixel Board tu peux créer un compte !</Alert>}
+      { !user && <Alert color="info">You have to create an account to access to all pixelboards !</Alert>}
       {error && <UncontrolledAlert color="danger">{error}</UncontrolledAlert>}
       <div className='grid4'>
         {pixelBoards.map((pixelBoard) => <PixelBoard key={pixelBoard._id} pixelBoard={pixelBoard} />)}
