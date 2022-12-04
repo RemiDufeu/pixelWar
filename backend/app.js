@@ -11,8 +11,6 @@ const Pixel = require('./models/Pixel')
 require('dotenv').config();
 
 const usersData = require('./backupJson/users.json')
-const pixelBoardData = require('./backupJson/pixelboards.json')
-const pixelData = require('./backupJson/pixels.json')
 
 const app = express()
 
@@ -24,8 +22,6 @@ mongoose.connect(process.env.MONGOCONNECTION,
   .then((count) => {
     if (count === 0) {
       User.insertMany(usersData)
-      PixelBoard.insertMany(pixelBoardData)
-      Pixel.insertMany(pixelData)
     }
   })
   .catch(() => console.log('Connexion à MongoDB échouée !'));
