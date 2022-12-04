@@ -95,7 +95,7 @@ const UpdateBoard = () => {
                     </Label>
                 </FormGroup>
                 <FormGroup floating>
-                    <Input name="dateFin" type="date" required value={dataBoard.dateFin.split('T')[0]}/>
+                    <Input name="dateFin" type="date" required defaultValue={dataBoard.dateFin.split('T')[0]}/>
                     <Label for="dateFin">
                     End Date
                     </Label>
