@@ -179,6 +179,7 @@ const PixelBoard = ({colorState}) => {
             <Tooltip
                 isOpen={tooltipOpen}
                 target="TooltipExample"
+                placement="right"
             >
 
                 Nom: {userNom} <br/>
