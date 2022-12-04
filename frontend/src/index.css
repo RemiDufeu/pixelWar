@@ -46,9 +46,22 @@ code {
   text-shadow: grey 1px 0 10px;
 }
 
+
 .titleBoardPage{
   color: rgb(122, 60, 2);
   margin-top: -60px;
+  font-size: 30px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-style: italic;
+}
+
+
+.titleBoardPageNotConnected{
+  color: rgb(122, 60, 2);
+  margin-top: 30px;
   font-size: 30px;
   display: block;
   margin-left: auto;

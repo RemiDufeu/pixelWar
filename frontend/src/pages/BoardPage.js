@@ -24,9 +24,13 @@ const BoardPage = () => {
       });
     }, []);
 
+    if (loading) {
+      return <Loading />;
+    }
       return (<>
         <TopBar/>
-        <h1 className="titleBoardPage">Let the Battle begins</h1>
+        {user && <h1 className="titleBoardPage">Let the Battle begins</h1>}
+        {!user && <h1 className="titleBoardPageNotConnected">Let the Battle begins</h1>}
         <div>
         <h1 className="titleBoard">{board && board.name}</h1>
           <Container className="flexBetween">
