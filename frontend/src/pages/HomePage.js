@@ -60,7 +60,6 @@ const HomePage = () => {
     return (<>
     <TopBar/>
         <Container>
-        <h1>Home</h1>
         <div className="flexAround">
             <Card style={{marginBottom : '30px'}}>
                 <CardBody style={{textAlign : 'center',width : '325px'}}>

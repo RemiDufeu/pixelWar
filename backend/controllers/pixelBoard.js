@@ -55,6 +55,18 @@ exports.getOne = (req, res, next) => {
         .catch(error => res.status(404).json({error}))
 }
 
+exports.deleteOne = (req, res, next) => {
+    // Delete all pixels of the board
+    Pixel.deleteMany({board : req.params.id})
+        .then(() => {
+            // Delete the board
+                    PixelBoard.deleteOne({ _id: req.params.id })
+                        .then(() => res.status(200).json({ message: 'PixelBoard supprimé !'}))
+                        .catch(error => res.status(400).json({error}))
+        })
+        .catch(error => res.status(400).json({error}))
+}
+
 exports.putPixel = (req, res, next) => {
     PixelBoard.findOne({ _id: req.params.id })
         .then(pixelBoard => {

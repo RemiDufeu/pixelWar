@@ -1,9 +1,18 @@
 /* eslint-disable linebreak-style */
 import React, { useEffect, useState } from 'react';
-import { Table, Button, UncontrolledDropdown, DropdownItem, ButtonGroup, DropdownToggle, DropdownMenu } from 'reactstrap';
+import {
+    Table,
+    Button,
+    UncontrolledDropdown,
+    DropdownItem,
+    ButtonGroup,
+    DropdownToggle,
+    DropdownMenu,
+    Container
+} from 'reactstrap';
 import { getAllUsers, deleteUser} from '../query/user';
-// import PropTypes from 'prop-types';
-
+import { TbUsers } from "react-icons/tb";
+import { TiEdit,TiTrash } from "react-icons/ti";
 export const UserList = () => {
 	const [user, setUser] = useState([]);
 	useEffect(() => {
@@ -11,17 +20,21 @@ export const UserList = () => {
 	}, []);
 
 	return (
-		<Table>
-			<thead>
+        <Container>
+            <h2 className="titre" style={{color:'#1562c2'}}><TbUsers className='icon'/>
+                List of users</h2>
+            <Table>
+                <thead>
                 <tr>
                     <th>Id</th>
                     <th>Nom</th>
                     <th>Prenom</th>
                     <th>Email</th>
                     <th>Role</th>
+                    <th>Actions</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 { user.map((u) => (
                     <tr key={u._id}>
                         <td>{u._id}</td>
@@ -32,19 +45,21 @@ export const UserList = () => {
                         <td>
                             <ButtonGroup>
                                 <Button color="primary" href={"/UserSuperUpdateDetails/" + u._id}>
-                                    Edit
+                                    <TiEdit className='iconbtn'/>
                                 </Button>
                                 <Button color="danger" onClick={() => {
                                     deleteUser(u._id);
                                     window.location.reload();
                                 }}>
-                                    Delete
+                                    <TiTrash className='iconbtn'/>
                                 </Button>
-                                </ButtonGroup>
-                            </td>
+                            </ButtonGroup>
+                        </td>
                     </tr>
                 ))}
-            </tbody>
+                </tbody>
             </Table>
+
+        </Container>
     );
 };

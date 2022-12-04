@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 import {deleteUser, getUser, updatePassword, updateUser} from "../query/user";
 import Loading from "./Loading";
+import {BiUser} from "react-icons/bi";
 
 const FormUpdate = ({redirectUrl = "/SignIn"}) => {
     const [email, setEmail] = useState("");
@@ -70,6 +71,8 @@ const FormUpdate = ({redirectUrl = "/SignIn"}) => {
     }
     return (
         <Container style={{marginTop: "80px"}}>
+            <h2 className="titre" style={{color:'#1562c2'}}><BiUser className='icon'/>
+                Manage your account</h2>
             <Card
                 color="light"
                 outline
