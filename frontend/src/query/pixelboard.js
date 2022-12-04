@@ -41,6 +41,24 @@ export const getAllActifsBoards = async () => {
     }
 };
 
+export const updateBoard = async (board) => {
+	const resp = await fetch(`${REACT_APP_API_URL}${PIXELBOARD_API_PATH}/${board._id}`,
+		{
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
+			},
+			body: JSON.stringify(board),
+		});
+	if (resp.ok) {
+		return resp.json();
+	} else {
+		throw resp.json();
+	}
+};
+	
+
 
 export const createBoard = async (board) => {
     const resp = await fetch(`${REACT_APP_API_URL}${PIXELBOARD_API_PATH}`,
@@ -128,3 +146,5 @@ export const deleteBoard = async (id) => {
 		throw resp.json();
 	}
 };
+
+
