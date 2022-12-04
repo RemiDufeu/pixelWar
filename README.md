@@ -1,9 +1,14 @@
 # Introduction
 Ce projet réalisé en React et nodejs a permis de developper une application web de dessin collaboratif intitulé **PixelWar**. 
+ 
+### Installation en production
+- Cloner le projet:
+  ``` git clone https://github.com/RemiDufeu/pixelWar.git ```
+- Lancer la commande: docker-compose up
+- L'application est maintenant disponible sur l'adresse: http://localhost:3000/
+- Il est possible de se connecter en tant qu'administrateur avec le compte: [email:admin, password: adminn]
 
-### Versions
- A compléter 
-### Installation
+### Installation en developpement
   - Cloner le projet: 
   ``` git clone https://github.com/RemiDufeu/pixelWar.git ```
   -  Backend: 
@@ -54,7 +59,6 @@ Ce projet réalisé en React et nodejs a permis de developper une application we
     - On peut avoir la possibilité (ou pas) de dessiner par dessus un pixel déjà dessiné
     - Impossibilité d'ajouter un pixel sur un pixelboard dont la date de fin est passée
 
-- **Docker:** A compléter
 ### Démonstration
 Lien de la vidéo: <>
 
