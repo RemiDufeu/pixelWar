@@ -6,6 +6,7 @@
     --accent: #B8DBD9;
     --button-border: #B8DBD9;
     --couleur:#F9F8F8;
+    --background:#011e49;
   }
   .theme-light {
     --dark-text: #5E4B56;
@@ -15,12 +16,13 @@
     --accent: #DBE7E4;
     --button-border: #5E4B56;
     --couleur:#050505;
+    --background: #FFF; 
   
   }
   #item{color:var(--couleur)}
   .navclass{
-    color: var(--dark-background);
-    background-color: var(--dark-background);
+    color: var(--background);
+    background-color: var(--background);
 
   }
 
