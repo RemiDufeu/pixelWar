@@ -5,7 +5,7 @@
     --light-background: #77909e;
     --accent: #B8DBD9;
     --button-border: #B8DBD9;
-    --couleur:var(--light-text)
+    --couleur:#F9F8F8;
   }
   .theme-light {
     --dark-text: #5E4B56;
@@ -14,14 +14,24 @@
     --light-background: #EDDCD2;
     --accent: #DBE7E4;
     --button-border: #5E4B56;
-    --couleur:var(--dark-text)
+    --couleur:#050505;
+  
   }
+  #item{color:var(--couleur)}
+  .navclass{
+    color: var(--dark-background);
+    background-color: var(--dark-background);
+
+  }
+
+  #taille{color: var(--couleur)}
   html, #root {
     background-color: var(--dark-background);
     color: var(--dark-text);
-    
   }
-  h1, th, tr, li, td, p{
+ #delais, #ouverture {color: var(--couleur);}
+
+a,h1,h4,th,tr, li, td, p{
     color: var(--couleur);
   }
   .table-striped{color: var(--couleur);}
@@ -121,7 +131,7 @@
     left: 3px;
     position: absolute;
     border-radius: 40px;
-    background: #084298;
+    background: #2f75dd;
 }
 
 .toggle--checkbox:checked + .toggle--label:after {

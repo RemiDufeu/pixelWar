@@ -169,7 +169,7 @@ const PixelBoard = ({colorState}) => {
             <Alert color="danger" style={{margin: '100px 20px', position: 'absolute', right: '50%', zIndex: 1}}
                    isOpen={error} toggle={deleteError}>{error}</Alert>
             <FormGroup>
-                <Label for="pixelSize">
+                <Label id="taille" for="pixelSize">
                     Taille d'un pixel {pixelW} px
                 </Label>
                 <Input name='pixelSize' type="range" min="5" max="50" step="5" aria-label="pixelSize" value={pixelW}

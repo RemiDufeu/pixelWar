@@ -68,24 +68,24 @@ const TopBar = () => {
     const TopBarConnected = () => {
         return (
             <>
-                <Navbar fixed="top" container="fluid" color="light" full="false" expand="md">
-                    <NavbarBrand href="/">PixelWar</NavbarBrand>
+                <Navbar className="navclass"  fixed="top" container="fluid" full="false" expand="md">
+                    <NavbarBrand id="item" href="/">PixelWar</NavbarBrand>
                     <Nav className="me-auto" navbar>
-                        <NavItem>
-                            <NavLink href="/">Home</NavLink>
+                        <NavItem id="item">
+                            <NavLink id="item" href="/">Home</NavLink>
                         </NavItem>
                         {user.userRole === 'admin' && <NavItem>
-                            <NavLink href={"/Admin"}>Create Pixelboard</NavLink>
+                            <NavLink id="item" href={"/Admin"}>Create Pixelboard</NavLink>
                         </NavItem>}
                         {user.userRole === 'admin' && <NavItem>
-                            <NavLink href={"/UserList"}>Users List</NavLink>
+                            <NavLink id="item" href={"/UserList"}>Users List</NavLink>
                         </NavItem>}
                     </Nav>
                     <Nav navbar>
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
-                                <BiUser className='iconuser'/>
-                                <span style={{
+                                <BiUser id="item" className='iconuser'/>
+                                <span id="item" style={{
                                     fontSize: '13px',
                                     fontWeight: 'bold'
                                 }}>Logged as {userInfos.prenom} {userInfos.nom}   </span>
@@ -127,7 +127,7 @@ const TopBar = () => {
     const TopBarNotConnected = () => {
         return (
             <>
-                <Navbar fixed="top" container="fluid" color="light" full="false" expand="md">
+                <Navbar fixed="top" container="fluid" color="dark" full="false" expand="md">
                     <NavbarBrand href="/">Pixel War</NavbarBrand>
                     <Nav className="me-auto" navbar>
                         <NavItem>

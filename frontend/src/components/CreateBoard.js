@@ -47,7 +47,7 @@ const CreateBoard = () => {
                 </FormGroup>
                 <FormGroup check>
                     <Input type="checkbox" aria-label="isPublic" name='isPublic'/> 
-                    <Label for="isPublic">{' '} Ouvert au publique</Label>
+                    <Label id="ouverture" for="isPublic">{' '} Ouvert au publique</Label>
                 </FormGroup>
                 <FormGroup floating>
                     
@@ -73,7 +73,7 @@ const CreateBoard = () => {
                     </Label>
                 </FormGroup>
                 <FormGroup>
-                    <Label for="delais">
+                    <Label id="delais" for="delais">
                     Delais d'un pixel : {delais} secondes
                     </Label>
                     <Input name='delais' type="range" min="10" max="3600" step="1" aria-label="delais" value={delais} onChange={changeDelais} />
