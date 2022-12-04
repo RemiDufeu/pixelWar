@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Form, FormGroup, Label, Button, Input, UncontrolledAlert } from "reactstrap";
 import { updateBoard, getPixelBoard } from '../query/pixelboard';
-import { FiGrid } from "react-icons/fi";
+import { RiEditBoxFill } from "react-icons/ri";
 import { useParams } from 'react-router-dom';
 import Loading from './Loading';
 import {AiFillEdit} from "react-icons/ai";
@@ -58,7 +58,7 @@ const UpdateBoard = () => {
 
     return (
         <Container>
-            <h2 className="titre" style={{color:'#1562c2'}}><FiGrid className='icon'/>
+            <h2 className="titre" style={{color:'#1562c2'}}><RiEditBoxFill className='icon'/>
                 Update Board</h2>
             <Form onSubmit={submitForm}>
                 <FormGroup floating>
@@ -109,7 +109,7 @@ const UpdateBoard = () => {
                 {step === 'success' && <UncontrolledAlert color="success">Le tableau a bien été modifié</UncontrolledAlert>}
                 {step === 'error' && <UncontrolledAlert color="danger">Une erreur est survenue</UncontrolledAlert>}
                 <FormGroup>
-                {step === 'loading' ? <Button disabled>Chargement...</Button> : <Button color="primary" type="submit" >Update <AiFillEdit className='iconbtn'/></Button>}
+                {step === 'loading' ? <Button disabled>Chargement...</Button> : <Button color="primary" type="submit" >Submit <AiFillEdit className='iconbtn'/></Button>}
                 </FormGroup>
             </Form>
        </Container>
