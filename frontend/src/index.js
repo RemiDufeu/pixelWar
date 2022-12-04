@@ -21,6 +21,7 @@ import UserUpdateDetails from "./pages/UserUpdatePage";
 import AdminUserListPage from "./pages/AdminUserListPage";
 import UserSuperUpdatePage from "./pages/UserSuperUpdatePage";
 import ContributionPage from "./pages/ContributionsPage";
+import UpdateBoardPage from './pages/UpdateBoardPage';
 
 
 const router = createBrowserRouter([
@@ -58,6 +59,9 @@ const router = createBrowserRouter([
 	}, {
 		path : '/Contributions/:id',
 		element : <ContributionPage />,
+	}, {
+		path : '/UpdateBoard/:id',
+		element : <UpdateBoardPage />,
 	}
 
 

@@ -34,7 +34,7 @@ const PixelBoards = ({pixelBoards, nameTab}) => {
             <Button color='secondary' disabled>Private</Button>
           }
           <br/>
-            {user && user.userRole === 'admin' && <Button color="secondary" > <TiEdit className='iconbtn'/></Button>}
+            {user && user.userRole === 'admin' && <Button color="secondary" href={`/UpdateBoard/${pixelBoard._id}`}> <TiEdit className='iconbtn'/></Button>}
             {user && user.userRole === 'admin' && <Button color="danger" onClick={() => deleteBoard(pixelBoard._id).then(() => window.location.reload())}>
                 <TiTrash className='iconbtn'/>
             </Button>}
