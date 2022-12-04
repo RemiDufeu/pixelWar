@@ -127,7 +127,7 @@ const TopBar = () => {
     const TopBarNotConnected = () => {
         return (
             <>
-                <Navbar fixed="top" container="fluid" color="dark" full="false" expand="md">
+                <Navbar fixed="top" container="fluid" color="light" full="false" expand="md">
                     <NavbarBrand href="/">Pixel War</NavbarBrand>
                     <Nav className="me-auto" navbar>
                         <NavItem>
