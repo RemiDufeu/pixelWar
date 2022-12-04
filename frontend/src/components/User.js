@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {deleteUser, getUser} from '../query/user';
 import { Container,ButtonGroup, Button, Card, CardBody, CardFooter, CardHeader, CardSubtitle, CardTitle } from 'reactstrap';
-import {BiUser} from "react-icons/bi";
+import {AiFillSecurityScan} from "react-icons/ai";
 import { RiPencilLine } from "react-icons/ri";
 // import PropTypes from 'prop-types';
 
@@ -21,7 +21,7 @@ import { RiPencilLine } from "react-icons/ri";
 
 	return (
 		<Container>
-			<h2 className="titre" style={{color:'#1562c2'}}><BiUser className='icon'/>
+			<h2 className="titre" style={{color:'#1562c2'}}><AiFillSecurityScan className='icon'/>
 				Personal Informations</h2>
 		<Card style={{
 			width: '40rem',

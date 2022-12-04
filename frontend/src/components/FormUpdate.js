@@ -11,6 +11,8 @@ import {
 import {deleteUser, getUser, updatePassword, updateUser} from "../query/user";
 import Loading from "./Loading";
 import {BiUser} from "react-icons/bi";
+import { CiSaveDown2,CiTrash } from "react-icons/ci";
+
 
 const FormUpdate = ({redirectUrl = "/SignIn"}) => {
     const [email, setEmail] = useState("");
@@ -128,7 +130,7 @@ const FormUpdate = ({redirectUrl = "/SignIn"}) => {
                                                                      fontSize: "16px",
                                                                      padding: "0px 10px 0px 10px",
                                                                      textAlign: "center"
-                                                                 }}>Save changes</Button>}
+                                                                 }}>Save changes <CiSaveDown2 className='iconbtn'/></Button>}
                     </Form>
 
                 </CardBody>
@@ -188,7 +190,7 @@ const FormUpdate = ({redirectUrl = "/SignIn"}) => {
                                                                          fontSize: "16px",
                                                                          padding: "0px 10px 0px 10px",
                                                                          textAlign: "center"
-                                                                     }}>Save changes</Button>}
+                                                                     }}>Save changes <CiSaveDown2 className='iconbtn'/></Button>}
                     </Form>
 
                 </CardBody>
@@ -228,7 +230,7 @@ const FormUpdate = ({redirectUrl = "/SignIn"}) => {
                                     )
 
                                 }}>
-                            Delete Account
+                            Delete Account <CiTrash className='iconbtn'/>
                         </Button>
 
                     </ButtonGroup>
