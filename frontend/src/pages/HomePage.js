@@ -63,20 +63,20 @@ const HomePage = () => {
         <div className="flexAround">
             <Card style={{marginBottom : '30px'}}>
                 <CardBody style={{textAlign : 'center',width : '325px'}}>
-                    <h4>Nombre de Pixelers</h4>
-                    <h2>{ loading ? "-" : userCount}</h2>
+                    <h4>Number of Pixelers</h4>
+                    <h2 style={{ textShadow: '#4682B4 1px 0 10px'}}>{ loading ? "-" : userCount} </h2>
                 </CardBody>
             </Card>
             <Card style={{marginBottom : '30px'}}>
                 <CardBody style={{textAlign : 'center',width : '325px'}}>
-                    <h4>Nombre de de PixelBoard</h4>
-                    <h2>{ loading ? "-" : pixelBoardCount}</h2>
+                    <h4>Number of PixelBoards</h4>
+                    <h2 style={{ textShadow: '#4682B4 1px 0 10px'}}>{ loading ? "-" : pixelBoardCount}</h2>
                 </CardBody>
             </Card>
         </div>
         <div></div>
-        <TabBtn tab={tab} setTab={setTab} index={0} name="Pixelboards actifs"></TabBtn>
-        <TabBtn tab={tab} setTab={setTab} index={2} name="Pixelboards terminés"></TabBtn>
+        <TabBtn tab={tab} setTab={setTab} index={0} name="Active Pixelboards"></TabBtn>
+        <TabBtn tab={tab} setTab={setTab} index={2} name="Completed Pixelboards"></TabBtn>
         <hr></hr>
         {tab === 0 ? <PixelBoards pixelBoards={pixelBoardActifs}/> : <PixelBoards pixelBoards={pixelBoardInactif}/>}
     </Container>

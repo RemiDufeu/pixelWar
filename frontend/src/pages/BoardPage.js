@@ -26,13 +26,13 @@ const BoardPage = () => {
 
       return (<>
         <TopBar/>
-        <div className="bg-light">
+        <div>
           <Container className="flexBetween">
-            <h1>Titre : {board && board.name}</h1>
+            <h1 style={{marginTop:'30px'}}>{board && board.name}</h1>
             <div>
-              <h4>Mode de jeu : {board && board.mode}</h4>
+              <h4>Game mode : {board && board.mode}</h4>
               <h4>Status : {board && board.status}</h4>
-              <h4>Date de fin : {board && new Date(board.dateFin).toLocaleDateString()}</h4>
+              <h4>End date : {board && new Date(board.dateFin).toLocaleDateString()}</h4>
             </div>
           </Container>
         </div>
