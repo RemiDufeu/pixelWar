@@ -76,10 +76,10 @@ const TopBar = () => {
                             <NavLink id="item" href="/">Home</NavLink>
                         </NavItem>
                         {user.userRole === 'admin' && <NavItem>
-                            <NavLink id="item" href={"/Admin"}>Create Pixelboard</NavLink>
+                            <NavLink id="item" href={"/#/Admin"}>Create Pixelboard</NavLink>
                         </NavItem>}
                         {user.userRole === 'admin' && <NavItem>
-                            <NavLink id="item" href={"/UserList"}>Users List</NavLink>
+                            <NavLink id="item" href={"/#/UserList"}>Users List</NavLink>
                         </NavItem>}
                     </Nav>
                     <Nav navbar>
@@ -93,17 +93,17 @@ const TopBar = () => {
                             </DropdownToggle>
                             <DropdownMenu right>
                                 <DropdownItem>
-                                    <NavLink href={"/UserDetails/" + user.userId}>
+                                    <NavLink href={"/#/UserDetails/" + user.userId}>
                                         Profile
                                     </NavLink>
                                 </DropdownItem>
                                 <DropdownItem>
-                                    <NavLink href={"/Contributions/" + user.userId}>Contributions</NavLink>
+                                    <NavLink href={"/#/Contributions/" + user.userId}>Contributions</NavLink>
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
                         <NavItem>
-                            <NavLink className='logout'  id='btn' href={"/Logout"}>Logout <BiArrowToRight className='iconbtn'/></NavLink>
+                            <NavLink className='logout'  id='btn' href={"/#/Logout"}>Logout <BiArrowToRight className='iconbtn'/></NavLink>
                         </NavItem>
                     </Nav>
                 </Navbar>
@@ -135,12 +135,12 @@ const TopBar = () => {
                             <NavLink href="/">Home</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/SignUp">Sign Up</NavLink>
+                            <NavLink href="/#/SignUp">Sign Up</NavLink>
                         </NavItem>
                     </Nav>
                     <Nav navbar>
                         <NavItem>
-                            <NavLink className='logout' id='btn' href={"/SignIn"}>Login <BiArrowToLeft className='iconbtn'/></NavLink>
+                            <NavLink className='logout' id='btn' href={"/#/SignIn"}>Login <BiArrowToLeft className='iconbtn'/></NavLink>
                         </NavItem>
                     </Nav>
                 </Navbar>

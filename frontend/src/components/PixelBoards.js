@@ -30,11 +30,11 @@ const PixelBoards = ({pixelBoards, nameTab}) => {
           <CardSubtitle> End date : {new Date(pixelBoard.dateFin).toLocaleDateString()}</CardSubtitle>
           <br></br>
           {(pixelBoard.isPublic || user) ?
-            <Button color="light" href={`/PixelBoard/${pixelBoard._id}`} style={{marginBottom:'10px'}}>Participate <CiPlay1 className='iconbtn'/></Button> :
+            <Button color="light" href={`/#/PixelBoard/${pixelBoard._id}`} style={{marginBottom:'10px'}}>Participate <CiPlay1 className='iconbtn'/></Button> :
             <Button color='secondary' disabled>Private</Button>
           }
           <br/>
-            {user && user.userRole === 'admin' && <Button color="secondary" href={`/UpdateBoard/${pixelBoard._id}`}> <TiEdit className='iconbtn'/></Button>}
+            {user && user.userRole === 'admin' && <Button color="secondary" href={`/#/UpdateBoard/${pixelBoard._id}`}> <TiEdit className='iconbtn'/></Button>}
             {user && user.userRole === 'admin' && <Button color="danger" onClick={() => deleteBoard(pixelBoard._id).then(() => window.location.reload())}>
                 <TiTrash className='iconbtn'/>
             </Button>}

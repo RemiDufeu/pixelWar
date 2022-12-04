@@ -44,7 +44,7 @@ export const UserList = () => {
                         <td>{u.role}</td>
                         <td>
                             <ButtonGroup>
-                                <Button color="primary" href={"/UserSuperUpdateDetails/" + u._id}>
+                                <Button color="primary" href={"/#/UserSuperUpdateDetails/" + u._id}>
                                     <TiEdit className='iconbtn'/>
                                 </Button>
                                 <Button color="danger" onClick={() => {

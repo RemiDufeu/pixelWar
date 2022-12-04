@@ -43,7 +43,7 @@ import { RiPencilLine } from "react-icons/ri";
         </CardBody>
         <CardFooter>
 		<ButtonGroup>
-		   <Button color="primary" href={"/UserUpdateDetails/" + user._id}>
+		   <Button color="primary" href={"/#/UserUpdateDetails/" + user._id}>
 			   Edit profile <RiPencilLine className='iconbtn'/>
 		   </Button>
 	   </ButtonGroup>

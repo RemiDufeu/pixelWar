@@ -5,7 +5,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-  createBrowserRouter,
+	createHashRouter,
   RouterProvider,
   Route,
 } from "react-router-dom";
@@ -24,7 +24,7 @@ import ContributionPage from "./pages/ContributionsPage";
 import UpdateBoardPage from './pages/UpdateBoardPage';
 
 
-const router = createBrowserRouter([
+const router = createHashRouter([
 	{
 	  path: "/",
 	  element: <HomePage />,
