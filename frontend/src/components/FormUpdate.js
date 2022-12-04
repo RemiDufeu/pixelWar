@@ -70,7 +70,7 @@ const FormUpdate = ({redirectUrl = "/SignIn"}) => {
         err = <p style={{color: "red"}}>{errormessage}</p>;
     }
     return (
-        <Container style={{marginTop: "80px"}}>
+        <Container>
             <h2 className="titre" style={{color:'#1562c2'}}><BiUser className='icon'/>
                 Manage your account</h2>
             <Card

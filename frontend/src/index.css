@@ -117,3 +117,9 @@ code {
   flex-direction: column;
   justify-content: space-evenly;
 }
+.infos{
+  margin-left: 30%;
+  line-height: 2em;
+  font-size: 20px;
+
+}
