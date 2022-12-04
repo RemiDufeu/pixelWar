@@ -106,8 +106,8 @@ const UpdateBoard = () => {
                     </Label>
                     <Input name='delais' type="range" min="10" max="3600" step="1" aria-label="delais" onChange={changeDelais} defaultValue={dataBoard.delais} />
                 </FormGroup>
-                {step === 'success' && <UncontrolledAlert color="success">Le tableau a bien été modifié</UncontrolledAlert>}
-                {step === 'error' && <UncontrolledAlert color="danger">Une erreur est survenue</UncontrolledAlert>}
+                {step === 'success' && <UncontrolledAlert color="success">PixelBoard updated with success</UncontrolledAlert>}
+                {step === 'error' && <UncontrolledAlert color="danger">An error has occured</UncontrolledAlert>}
                 <FormGroup>
                 {step === 'loading' ? <Button disabled>Chargement...</Button> : <Button color="primary" type="submit" >Submit <AiFillEdit className='iconbtn'/></Button>}
                 </FormGroup>
