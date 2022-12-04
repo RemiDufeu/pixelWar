@@ -16,7 +16,7 @@ exports.create = (req, res, next) => {
         delais: req.body.delais
     })
     pixelBoard.save()
-        .then(() => res.status(201).json({ message : "PixelBoard créé !"}))
+        .then(() => res.status(201).json({ message : "PixelBoard created !"}))
         .catch(error => res.status(400).json({error}))
 };
 
@@ -34,7 +34,7 @@ exports.update = (req, res, next) => {
         delais: req.body.delais
     })
     PixelBoard.updateOne({_id: req.params.id}, pixelBoard)
-        .then(() => res.status(200).json({ message : "PixelBoard modifié !"}))
+        .then(() => res.status(200).json({ message : "PixelBoard has been modified !"}))
         .catch(error => res.status(400).json({error}))
 };
 
@@ -79,7 +79,7 @@ exports.deleteOne = (req, res, next) => {
         .then(() => {
             // Delete the board
                     PixelBoard.deleteOne({ _id: req.params.id })
-                        .then(() => res.status(200).json({ message: 'PixelBoard supprimé !'}))
+                        .then(() => res.status(200).json({ message: 'PixelBoard has been deleted !'}))
                         .catch(error => res.status(400).json({error}))
         })
         .catch(error => res.status(400).json({error}))
@@ -93,14 +93,14 @@ exports.putPixel = (req, res, next) => {
 
             let indexPx = req.body.x + (req.body.y * pixelBoard.width)
             if(pixelBoard.status !== 'actif') {
-                return res.status(400).json({error : 'PixelBoard non actif'})
+                return res.status(400).json({error : 'PixelBoard non activated'})
             }
 
             if(pixelBoard.dateFin < Date.now()) {
-                return res.status(400).json({error : 'Date de fin passée'})
+                return res.status(400).json({error : 'The end date has already passed'})
             }
             if(pixelBoard.pixelsView[indexPx] != null && pixelBoard.mode === 'onePixel'){
-                res.status(400).json({error : "Pixel déjà pris"})
+                res.status(400).json({error : "Pixel already taken"})
             } else {
                 if (pixelBoard.mode == 'infinite') {
                     if (pixelBoard.pixelsView[indexPx] != null) {
@@ -125,7 +125,7 @@ exports.putPixel = (req, res, next) => {
                     pixelBoard.status = 'inactif'
                 }
                 pixelBoard.save()
-                    .then(() => res.status(200).json({message : "Pixel mis à jour"}))
+                    .then(() => res.status(200).json({message : "Pixel updated"}))
                     .catch(error => res.status(400).json({error}))
             }
         })

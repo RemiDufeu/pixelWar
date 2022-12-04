@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
         const userRole = decodedToken.userRole;
         req.auth = decodedToken.userId
        if (userRole !== 'admin') {
-            throw 'role non valide'
+            throw 'invalid role'
         } else {
             next();
         }

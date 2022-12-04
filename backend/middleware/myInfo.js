@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
     try {
 
         if(!req.params.id) {
-            throw "pas d'id dans la requête"
+            throw "Id is missing in the query"
         }
 
         const tokenRaw = req.headers.authorization.split(' ')[1];
@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
         const userId = decodedToken.userId;
 
         if(req.params.id !== userId &&  'admin' !== decodedToken.userRole) {
-            throw "L'utilsateur n'a pas accès à cette ressource"
+            throw "This user doesn't have access to this ressource"
         }
 
         req.auth = { userId }
