@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { postUser } from "../query/user";
 import Loading from "./Loading";
+import {FiUserPlus} from "react-icons/fi";
+import React from "react";
 
 const Formsignup = ({redirectUrl = "/SignIn"}) => {
   const [name, setName] = useState("");
@@ -40,7 +42,8 @@ const Formsignup = ({redirectUrl = "/SignIn"}) => {
     <Container style={{ marginTop: "80px" }}>
       {err}
       <Form>
-    SignUp
+        <h2 className="titre" style={{color:'#1562c2'}}><FiUserPlus className='icon'/>
+          Sign Up</h2>
         <FormGroup floating>
         <Input
         type="text"

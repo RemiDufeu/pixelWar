@@ -10,7 +10,7 @@
   .theme-light {
     --dark-text: #5E4B56;
     --light-text: #fffefe;
-    --dark-background: #DBE7E4;
+    --dark-background: rgba(225, 221, 221, 0.62);
     --light-background: #EDDCD2;
     --accent: #DBE7E4;
     --button-border: #5E4B56;

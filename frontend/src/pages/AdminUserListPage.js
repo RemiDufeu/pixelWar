@@ -4,6 +4,7 @@ import Loading from '../components/Loading';
 import TopBar from '../components/Topbar';
 import { UserList } from '../components/UserList';
 import { useRequireRole } from '../lib/useRole';
+import {FcGrid} from "react-icons/fc";
 
 const AdminUserListPage = () => {
 
@@ -16,7 +17,6 @@ const AdminUserListPage = () => {
   return (
     <>
         <TopBar/>
-        <div>AdminPage</div>
         <UserList/>
     </>
   )

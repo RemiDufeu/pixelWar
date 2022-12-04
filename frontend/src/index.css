@@ -59,3 +59,31 @@ code {
     grid-template-columns: repeat(1, 1fr);
   }
 }
+.titre{
+  font-size: 25px;
+  margin-bottom: 20px;
+  font-weight: normal;
+  text-shadow: rgba(167, 220, 232, 0.84) 1px 0 10px;
+
+}
+.icon{
+  font-size: 48px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+
+}
+.iconbtn{
+  font-size: 25px;
+}
+.iconuser{
+  margin-bottom: 10px;
+  font-size: 25px;
+  margin-right: 5px;
+}
+.logout{
+  background-color: rgba(164, 158, 158, 0.75);
+  width: 100px;
+  margin-left: 20px;
+  text-align: center;
+  border-radius: 10px;
+}

@@ -16,8 +16,6 @@ const AdminPage = () => {
   return (
     <>
         <TopBar/>
-      <div>AdminPage</div>
-      <Users/>
       <CreateBoard/>
     </>
   )

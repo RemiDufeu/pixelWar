@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Container, Form, FormGroup, Label, Button, Input, UncontrolledAlert } from "reactstrap";
 import { createBoard } from '../query/pixelboard';
+import { FiGrid } from "react-icons/fi";
+
 
 const CreateBoard = () => {
 
@@ -28,7 +30,8 @@ const CreateBoard = () => {
 
     return (
         <Container>
-            <h1>CreateBoard</h1>
+            <h2 className="titre" style={{color:'#1562c2'}}><FiGrid className='icon'/>
+                CreateBoard</h2>
             <Form onSubmit={submitForm}>
                 <FormGroup floating>
                     <Input type="text" placeholder="Titre"aria-label="name" name='name' required/>

@@ -18,15 +18,16 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    NavbarText,
-  } from 'reactstrap';
-import { getUser } from '../query/user';
+    NavbarText, Dropdown,
+} from 'reactstrap';
+import {getUser} from '../query/user';
 //import { keepTheme } from '../theme/theme';
 
 
 //import { setTheme } from '../components/Formsignin'
 import '../theme/theme.css';
-import { setTheme } from '../theme/theme';
+import {setTheme} from '../theme/theme';
+import {BiUser} from "react-icons/bi";
 
 const TopBar = () => {
 
@@ -35,18 +36,18 @@ const TopBar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleNav = () => setIsOpen(!isOpen);
     const [userInfos, setUserInfos] = useState([]);
-	useEffect(() => {
+    useEffect(() => {
         if (user) {
-            getUser(user.userId).then((json) => 
-            setUserInfos(json.data),
+            getUser(user.userId).then((json) =>
+                setUserInfos(json.data),
             );
         }
-	}, [user]);
+    }, [user]);
 
     let theme = localStorage.getItem('theme');
-   /* useEffect(() => {
-        keepTheme();
-    })*/
+    /* useEffect(() => {
+         keepTheme();
+     })*/
     const handleOnClick = () => {
         if (localStorage.getItem('theme') === 'theme-dark') {
             setTheme('theme-light');
@@ -67,85 +68,97 @@ const TopBar = () => {
     const TopBarConnected = () => {
         return (
             <>
-            <Navbar fixed="top" container="fluid" color="light" full="false" expand="md">
-        <NavbarBrand href="/">Pixel War</NavbarBrand>
-          <Nav className="me-auto" navbar>
-          <NavItem>
-            <NavLink href="/">Home</NavLink>
-            </NavItem>
-            {user.userRole === 'admin' && <NavItem>
-              <NavLink href={"/Admin"}>Admin</NavLink>
-            </NavItem>}
-            {user.userRole === 'admin' && <NavItem>
-              <NavLink href={"/UserList"}>User List</NavLink>
-            </NavItem>}
-            <NavItem>
-              <NavLink href={"/Contributions/" + user.userId}>Contributions</NavLink>
-            </NavItem>
-          </Nav>
-          <Nav navbar>
-          <NavbarText>
-            Login as {userInfos.prenom} {userInfos.nom}
-            </NavbarText>
-            <NavItem color="secondary">
-              <NavLink href={"/UserDetails/" + user.userId}>Profile</NavLink>
-            </NavItem>
-            <NavItem>
-            <NavLink href={"/Logout"}>Logout</NavLink>
-          </NavItem>
-          </Nav>
-      </Navbar>
-      <br />
-        <br />
+                <Navbar fixed="top" container="fluid" color="light" full="false" expand="md">
+                    <NavbarBrand href="/">PixelWar</NavbarBrand>
+                    <Nav className="me-auto" navbar>
+                        <NavItem>
+                            <NavLink href="/">Home</NavLink>
+                        </NavItem>
+                        {user.userRole === 'admin' && <NavItem>
+                            <NavLink href={"/Admin"}>Create Pixelboard</NavLink>
+                        </NavItem>}
+                        {user.userRole === 'admin' && <NavItem>
+                            <NavLink href={"/UserList"}>Users List</NavLink>
+                        </NavItem>}
+                    </Nav>
+                    <Nav navbar>
+                        <UncontrolledDropdown nav inNavbar>
+                            <DropdownToggle nav caret>
+                                <BiUser className='iconuser'/>
+                                <span style={{
+                                    fontSize: '13px',
+                                    fontWeight: 'bold'
+                                }}>Logged as {userInfos.prenom} {userInfos.nom}   </span>
+                            </DropdownToggle>
+                            <DropdownMenu right>
+                                <DropdownItem>
+                                    <NavLink href={"/UserDetails/" + user.userId}>
+                                        Profile
+                                    </NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <NavLink href={"/Contributions/" + user.userId}>Contributions</NavLink>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                        <NavItem>
+                            <NavLink className='logout' href={"/Logout"}>Logout</NavLink>
+                        </NavItem>
+                    </Nav>
+                </Navbar>
+                <br/>
+                <br/>
                 <div className="container--toggle">
-                        {
-                            toggle === "light" ?
-                            <input type="checkbox" id="toggle" className="toggle--checkbox" onClick={handleOnClick} checked />
+                    {
+                        toggle === "light" ?
+                            <input type="checkbox" id="toggle" className="toggle--checkbox" onClick={handleOnClick}
+                                   checked/>
                             :
-                            <input type="checkbox" id="toggle" className="toggle--checkbox" onClick={handleOnClick} />
-                        }
-                        <label htmlFor="toggle" className="toggle--label">
-                            <span className="toggle--label-background"></span>
-                        </label>
-                    </div>
-            </> 
-            )
+                            <input type="checkbox" id="toggle" className="toggle--checkbox" onClick={handleOnClick}/>
+                    }
+                    <label htmlFor="toggle" className="toggle--label">
+                        <span className="toggle--label-background"></span>
+                    </label>
+                </div>
+            </>
+        )
     }
 
     const TopBarNotConnected = () => {
         return (
             <>
-            <Navbar fixed="top" container="fluid" color="light" full="false" expand="md">
-        <NavbarBrand href="/">Pixel War</NavbarBrand>
-          <Nav className="me-auto" navbar>
-          <NavItem>
-            <NavLink href="/">Home</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/SignUp">Sign Up</NavLink>
-            </NavItem>
-          </Nav>
-          <Nav navbar>
-            <NavItem>
-            <NavLink href="/SignIn">Sign In</NavLink>
-          </NavItem>
-          </Nav>
-      </Navbar>
-      <br />
-        <br />
+                <Navbar fixed="top" container="fluid" color="light" full="false" expand="md">
+                    <NavbarBrand href="/">Pixel War</NavbarBrand>
+                    <Nav className="me-auto" navbar>
+                        <NavItem>
+                            <NavLink href="/">Home</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="/SignUp">Sign Up</NavLink>
+                        </NavItem>
+                    </Nav>
+                    <Nav navbar>
+                        <NavItem>
+                            <NavLink className='logout' href={"/SignIn"}>Sign In</NavLink>
+                        </NavItem>
+                    </Nav>
+                </Navbar>
+                <br/>
+                <br/>
                 <div className="container--toggle">
-                        {
-                            toggle === "light" ?
-                            <input type="checkbox" id="toggle" className="toggle--checkbox" onClick={handleOnClick} checked />
+                    {
+                        toggle === "light" ?
+                            <input type="checkbox" id="toggle" className="toggle--checkbox" onClick={handleOnClick}
+                                   checked/>
                             :
-                            <input type="checkbox" id="toggle" className="toggle--checkbox" onClick={handleOnClick} />
-                        }
-                        <label htmlFor="toggle" className="toggle--label">
-                            <span className="toggle--label-background"></span>
-                        </label>
-                    </div>
-            </> 
-            )
+                            <input type="checkbox" id="toggle" className="toggle--checkbox" onClick={handleOnClick}/>
+                    }
+                    <label htmlFor="toggle" className="toggle--label">
+                        <span className="toggle--label-background"></span>
+                    </label>
+                </div>
+            </>
+        )
     }
 
     if (loading) {
