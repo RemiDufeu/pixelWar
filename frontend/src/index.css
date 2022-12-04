@@ -103,11 +103,14 @@ code {
   margin-right: 5px;
 }
 .logout{
-  background-color: rgba(164, 158, 158, 0.75);
+  background-color: rgb(50, 128, 218);
   width: 100px;
   margin-left: 20px;
   text-align: center;
   border-radius: 10px;
+}
+#btn{
+  color: white;
 }
 .logo{
   width: 300px;

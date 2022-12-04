@@ -28,6 +28,7 @@ import {getUser} from '../query/user';
 import '../theme/theme.css';
 import {setTheme} from '../theme/theme';
 import {BiUser} from "react-icons/bi";
+import { BiArrowToRight,BiArrowToLeft } from "react-icons/bi";
 
 const TopBar = () => {
 
@@ -102,7 +103,7 @@ const TopBar = () => {
                             </DropdownMenu>
                         </UncontrolledDropdown>
                         <NavItem>
-                            <NavLink className='logout' href={"/Logout"}>Logout</NavLink>
+                            <NavLink className='logout'  id='btn' href={"/Logout"}>Logout <BiArrowToRight className='iconbtn'/></NavLink>
                         </NavItem>
                     </Nav>
                 </Navbar>
@@ -139,7 +140,7 @@ const TopBar = () => {
                     </Nav>
                     <Nav navbar>
                         <NavItem>
-                            <NavLink className='logout' href={"/SignIn"}>Sign In</NavLink>
+                            <NavLink className='logout' id='btn' href={"/SignIn"}>Login <BiArrowToLeft className='iconbtn'/></NavLink>
                         </NavItem>
                     </Nav>
                 </Navbar>
