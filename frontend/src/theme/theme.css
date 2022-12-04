@@ -24,10 +24,6 @@
   h1, th, tr, li, td, p{
     color: var(--couleur);
   }
-  p{ margin-left: 80%;
-    margin-right:0%;
-    color: var(--couleur);
-}
   .table-striped{color: var(--couleur);}
   
   nav {
