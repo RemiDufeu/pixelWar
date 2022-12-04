@@ -3,6 +3,7 @@ import { Alert, Button, Card, CardBody, Container } from "reactstrap";
 import PixelBoards from "../components/PixelBoards";
 import TopBar from "../components/Topbar";
 import { getPublicStats } from "../query/pixelboard";
+import logo from "../assets/logo.png"
 
 const HomePage = () => {
 
@@ -62,13 +63,14 @@ const HomePage = () => {
         <Container>
         <div className="flexAround">
             <Card style={{marginBottom : '30px'}}>
-                <CardBody style={{textAlign : 'center',width : '325px'}}>
+                <CardBody style={{textAlign : 'center',width : '325px'}} className="bodycard">
                     <h4>Number of Pixelers</h4>
                     <h2 style={{ textShadow: '#4682B4 1px 0 10px'}}>{ loading ? "-" : userCount} </h2>
                 </CardBody>
             </Card>
+            <img src={logo} className="logo"/>
             <Card style={{marginBottom : '30px'}}>
-                <CardBody style={{textAlign : 'center',width : '325px'}}>
+                <CardBody style={{textAlign : 'center',width : '325px'}} className="bodycard">
                     <h4>Number of PixelBoards</h4>
                     <h2 style={{ textShadow: '#4682B4 1px 0 10px'}}>{ loading ? "-" : pixelBoardCount}</h2>
                 </CardBody>
