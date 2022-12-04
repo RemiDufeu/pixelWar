@@ -209,7 +209,7 @@ const FormUpdate = ({redirectUrl = "/SignIn"}) => {
                     Delete account
                 </CardHeader>
                 <CardBody>
-                    <CardText>
+                    <CardText id="ligne">
                         You will lose access to your account once your deletion request has been submitted.
                     </CardText>
                     <ButtonGroup>

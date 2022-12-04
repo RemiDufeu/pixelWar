@@ -64,14 +64,14 @@ const HomePage = () => {
         <div className="flexAround">
             <Card style={{marginBottom : '30px'}}>
                 <CardBody style={{textAlign : 'center',width : '325px'}} className="bodycard">
-                    <h4>Number of Pixelers</h4>
+                    <h4 id="nb">Number of Pixelers</h4>
                     <h2>{ loading ? "-" : userCount} </h2>
                 </CardBody>
             </Card>
             <img src={logo} className="logo"/>
             <Card style={{marginBottom : '30px'}}>
                 <CardBody style={{textAlign : 'center',width : '325px'}} className="bodycard">
-                    <h4>Number of PixelBoards</h4>
+                    <h4 id="nb">Number of PixelBoards</h4>
                     <h2>{ loading ? "-" : pixelBoardCount}</h2>
                 </CardBody>
             </Card>

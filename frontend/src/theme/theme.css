@@ -37,7 +37,7 @@ a,h1,h4,th,tr, li, td, p{
     color: var(--couleur);
   }
   .table-striped{color: var(--couleur);}
-  
+  #nb,#ligne{color: black}
   nav {
     background-color: var(--dark-background);
     color: var(--light-text);
