@@ -7,6 +7,8 @@
     --button-border: #B8DBD9;
     --couleur:#F9F8F8;
     --background:#011e49;
+    --color-picker: #061218;
+    --title:#F9F8F8;
   }
   .theme-light {
     --dark-text: #5E4B56;
@@ -17,14 +19,18 @@
     --button-border: #5E4B56;
     --couleur:#050505;
     --background: #FFF; 
+    --color-picker: #FFF;
+    --title:#696969;
   
   }
+  .titleBoard{color:var(--title)}
   #item{color:var(--couleur)}
   .navclass{
     color: var(--background);
     background-color: var(--background);
 
   }
+  .colorPicker{background-color: var(--color-picker);}
 
   #taille{color: var(--couleur)}
   html, #root {
@@ -36,6 +42,7 @@
 a,h1,h4,th,tr, li, td, p{
     color: var(--couleur);
   }
+  #couleur{color: var(--couleur);}
   .table-striped{color: var(--couleur);}
   #nb,#ligne{color: black}
   nav {

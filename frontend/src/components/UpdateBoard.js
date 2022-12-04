@@ -75,7 +75,7 @@ const UpdateBoard = () => {
                 </FormGroup>
                 <FormGroup check>
                     <Input type="checkbox" aria-label="isPublic" name='isPublic' id="isPublic" defaultChecked={dataBoard.isPublic} />
-                    <Label for="isPublic">{' '} Open to public ?</Label>
+                    <Label id="ouverture" for="isPublic">{' '} Open to public ?</Label>
                 </FormGroup>
                 <FormGroup floating>
                     
@@ -101,7 +101,7 @@ const UpdateBoard = () => {
                     </Label>
                 </FormGroup>
                 <FormGroup>
-                    <Label for="delais">
+                    <Label id="delais" for="delais">
                     Pixel Delay : {dataBoard.delais} secondes
                     </Label>
                     <Input name='delais' type="range" min="10" max="3600" step="1" aria-label="delais" onChange={changeDelais} defaultValue={dataBoard.delais} />
