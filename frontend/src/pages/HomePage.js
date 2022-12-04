@@ -65,14 +65,14 @@ const HomePage = () => {
             <Card style={{marginBottom : '30px'}}>
                 <CardBody style={{textAlign : 'center',width : '325px'}} className="bodycard">
                     <h4>Number of Pixelers</h4>
-                    <h2 style={{ textShadow: '#4682B4 1px 0 10px'}}>{ loading ? "-" : userCount} </h2>
+                    <h2>{ loading ? "-" : userCount} </h2>
                 </CardBody>
             </Card>
             <img src={logo} className="logo"/>
             <Card style={{marginBottom : '30px'}}>
                 <CardBody style={{textAlign : 'center',width : '325px'}} className="bodycard">
                     <h4>Number of PixelBoards</h4>
-                    <h2 style={{ textShadow: '#4682B4 1px 0 10px'}}>{ loading ? "-" : pixelBoardCount}</h2>
+                    <h2>{ loading ? "-" : pixelBoardCount}</h2>
                 </CardBody>
             </Card>
         </div>
