@@ -1,5 +1,8 @@
 # Introduction
 Ce projet réalisé en React et nodejs a permis de developper une application web de dessin collaboratif intitulé **PixelWar**. 
+
+### Démonstration
+Lien de la vidéo: https://www.youtube.com/watch?v=B-Ex2dppS3A 
  
 ### Installation en production
 - Cloner le projet:
@@ -58,7 +61,4 @@ Ce projet réalisé en React et nodejs a permis de developper une application we
     - On peut avoir une infobulle sur l'utilisateur qui a ajouté le pixel et à quelle date. 
     - On peut avoir la possibilité (ou pas) de dessiner par dessus un pixel déjà dessiné
     - Impossibilité d'ajouter un pixel sur un pixelboard dont la date de fin est passée
-
-### Démonstration
-Lien de la vidéo: <>
 
