@@ -4,6 +4,7 @@ import useLocalStorage from "../lib/useLocalStorage";
 import { Input, Form, Container, FormGroup, Label, Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import Loading from "./Loading";
+import { setTheme } from "../theme/theme";
 
 const Formsignin = ({ redirectUrl = "/"}) => {
     const [password, setPassword] = useState("");
@@ -20,6 +21,7 @@ const Formsignin = ({ redirectUrl = "/"}) => {
         loginUser(email, password)
         .then((res) => {
             setToken(res.token);
+            setTheme('theme-light')
             setLoading(false);
             navigate(redirectUrl);
         })

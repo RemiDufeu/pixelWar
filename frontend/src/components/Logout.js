@@ -9,7 +9,7 @@ const Logout = ({redirectUrl = "/SignIn"}) => {
     
     useEffect(() => {
         setToken(null);
-        setTheme(null);
+        setTheme('theme-light');
         navigate(redirectUrl);
     }, []);
 
