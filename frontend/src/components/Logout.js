@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import useLocalStorage from "../lib/useLocalStorage";
 import { useNavigate } from "react-router-dom";
+import { setTheme } from "../theme/theme";
 
 const Logout = ({redirectUrl = "/SignIn"}) => {
     const [, setToken] = useLocalStorage("token", null);
@@ -8,6 +9,7 @@ const Logout = ({redirectUrl = "/SignIn"}) => {
     
     useEffect(() => {
         setToken(null);
+        setTheme(null);
         navigate(redirectUrl);
     }, []);
 
