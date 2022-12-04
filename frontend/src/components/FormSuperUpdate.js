@@ -3,7 +3,10 @@ import {useNavigate, useParams} from "react-router-dom";
 import { Container, Form, FormGroup, Label, Input, Button, ButtonGroup } from "reactstrap";
 import {getUser, updateUser, updateRole, deleteUser} from "../query/user";
 import Loading from "./Loading";
-
+import {TiTrash} from "react-icons/ti";
+import { AiFillEdit } from "react-icons/ai";
+import React from "react";
+import { AiOutlineUserSwitch } from "react-icons/ai";
 const FormSuperUpdate = ({redirectUrl = "/UserList"}) => {
     const [email, setEmail] = useState("");
     const [nom, setNom] = useState("");
@@ -89,8 +92,9 @@ const FormSuperUpdate = ({redirectUrl = "/UserList"}) => {
     return (
         <Container style={{ marginTop: "80px" }}>
             {err}
+            <h2 className="titre" style={{color:'#1562c2'}}><AiOutlineUserSwitch className='icon'/>
+                Update User</h2>
             <Form>
-                Update User
                 <FormGroup floating>
                     <Input
                         type="email"
@@ -106,28 +110,27 @@ const FormSuperUpdate = ({redirectUrl = "/UserList"}) => {
                         type="text"
                         value={nom}
                         onChange={(e) => setNom(e.target.value)}
-                        placeholder="Nom"
-                        aria-label="Nom"
+                        placeholder="Last Name"
+                        aria-label="Last Name"
                     />
-                    <Label for="Nom">Nom</Label>
+                    <Label for="Last Name">Last Name</Label>
                 </FormGroup>
                 <FormGroup floating>
                     <Input
                         type="text"
                         value={prenom}
                         onChange={(e) => setPrenom(e.target.value)}
-                        placeholder="Prenom"
-                        aria-label="Prenom"
+                        placeholder="First Name"
+                        aria-label="First Name"
                     />
-                    <Label for="Prenom">Prenom</Label>
+                    <Label for="First Name">First Name</Label>
                 </FormGroup>
-                <ButtonGroup>
+                <ButtonGroup style={{marginRight :'5px'}}>
                     {buttActive(role)}
                     {buttOther(role)}
                 </ButtonGroup>
-
-                <Button color="danger" onClick={handleDelete}>Delete</Button>
-                {loading ? <Loading></Loading> : <Button onClick={handleUpdate} size="lg" color="primary" style={{marginTop: 30,textAlign: "center", margin: "auto", display: "flex"}}>Submit</Button>}
+                <Button color="danger" onClick={handleDelete}><TiTrash className='iconbtn'/> </Button>
+                {loading ? <Loading></Loading> : <Button onClick={handleUpdate} color="primary" style={{marginTop: 30,textAlign: "center", margin: "auto", display: "flex"}}>Submit  <AiFillEdit className='iconbtn'/></Button>}
             </Form>
         </Container>
     );

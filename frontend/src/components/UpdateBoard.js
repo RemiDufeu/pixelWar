@@ -4,6 +4,7 @@ import { updateBoard, getPixelBoard } from '../query/pixelboard';
 import { FiGrid } from "react-icons/fi";
 import { useParams } from 'react-router-dom';
 import Loading from './Loading';
+import {AiFillEdit} from "react-icons/ai";
 
 
 const UpdateBoard = () => {
@@ -61,20 +62,20 @@ const UpdateBoard = () => {
                 Update Board</h2>
             <Form onSubmit={submitForm}>
                 <FormGroup floating>
-                    <Input type="text" placeholder="Titre"aria-label="name" name='name' required defaultValue={dataBoard.name} />
-                    <Label for="name">Titre</Label>
+                    <Input type="text" placeholder="Title"aria-label="name" name='name' required defaultValue={dataBoard.name} />
+                    <Label for="name">Title</Label>
                 </FormGroup>
                 <FormGroup floating>
-                    <Input type="number" min="10" step="1" max="250" placeholder="Largeur" name='width' aria-label="width" required defaultValue={dataBoard.width} />
-                    <Label for="width">Largeur</Label>
+                    <Input type="number" min="10" step="1" max="250" placeholder="Width" name='width' aria-label="width" required defaultValue={dataBoard.width} />
+                    <Label for="width">Width</Label>
                 </FormGroup>
                 <FormGroup floating>
-                    <Input type="number" min="10" step="1" max="250" placeholder="Hauteur" aria-label="height" name='height' required defaultValue={dataBoard.height} />
-                    <Label for="height">Hauteur</Label>
+                    <Input type="number" min="10" step="1" max="250" placeholder="Height" aria-label="height" name='height' required defaultValue={dataBoard.height} />
+                    <Label for="height">Height</Label>
                 </FormGroup>
                 <FormGroup check>
                     <Input type="checkbox" aria-label="isPublic" name='isPublic' id="isPublic" defaultChecked={dataBoard.isPublic} />
-                    <Label for="isPublic">{' '} Ouvert au publique</Label>
+                    <Label for="isPublic">{' '} Open to public ?</Label>
                 </FormGroup>
                 <FormGroup floating>
                     
@@ -96,19 +97,19 @@ const UpdateBoard = () => {
                 <FormGroup floating>
                     <Input name="dateFin" type="date" required value={dataBoard.dateFin.split('T')[0]}/>
                     <Label for="dateFin">
-                    Date de fin
+                    End Date
                     </Label>
                 </FormGroup>
                 <FormGroup>
                     <Label for="delais">
-                    Delais d'un pixel : {dataBoard.delais} secondes
+                    Pixel Delay : {dataBoard.delais} secondes
                     </Label>
                     <Input name='delais' type="range" min="10" max="3600" step="1" aria-label="delais" onChange={changeDelais} defaultValue={dataBoard.delais} />
                 </FormGroup>
                 {step === 'success' && <UncontrolledAlert color="success">Le tableau a bien été modifié</UncontrolledAlert>}
                 {step === 'error' && <UncontrolledAlert color="danger">Une erreur est survenue</UncontrolledAlert>}
                 <FormGroup>
-                {step === 'loading' ? <Button size="lg" disabled>Chargement...</Button> : <Button color="primary" type="submit" size="lg" >Modifier</Button>}
+                {step === 'loading' ? <Button disabled>Chargement...</Button> : <Button color="primary" type="submit" >Update <AiFillEdit className='iconbtn'/></Button>}
                 </FormGroup>
             </Form>
        </Container>
