@@ -26,9 +26,10 @@ const BoardPage = () => {
 
       return (<>
         <TopBar/>
+        <h1 className="titleBoardPage">Let's the battle begins</h1>
         <div>
+        <h1 className="titleBoard">{board && board.name}</h1>
           <Container className="flexBetween">
-            <h1 style={{marginTop:'30px'}}>{board && board.name}</h1>
             <div>
               <h4>Game mode : {board && board.mode}</h4>
               <h4>Status : {board && board.status}</h4>
