@@ -20,6 +20,24 @@ exports.create = (req, res, next) => {
         .catch(error => res.status(400).json({error}))
 };
 
+exports.update = (req, res, next) => {
+    const pixelBoard = new PixelBoard({
+        _id: req.body._id,
+        name: req.body.name,
+        width: req.body.width,
+        height: req.body.height,
+        isPublic : req.body.isPublic,
+        mode : req.body.mode,
+        creator: req.body.creator,
+        dateFin: req.body.dateFin,
+        pixelsView: req.body.pixelsView,
+        delais: req.body.delais
+    })
+    PixelBoard.updateOne({_id: req.params.id}, pixelBoard)
+        .then(() => res.status(200).json({ message : "PixelBoard modifié !"}))
+        .catch(error => res.status(400).json({error}))
+};
+
 exports.getAll = (req, res, next) => {
     PixelBoard.find()
         .then(pixelBoard => res.status(200).json(pixelBoard))

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Form, FormGroup, Label, Button, Input, UncontrolledAlert } from "reactstrap";
-import { createBoard, getPixelBoard } from '../query/pixelboard';
+import { updateBoard, getPixelBoard } from '../query/pixelboard';
 import { FiGrid } from "react-icons/fi";
 import { useParams } from 'react-router-dom';
 import Loading from './Loading';
@@ -44,8 +44,11 @@ const UpdateBoard = () => {
         const formDatas = new FormData(e.target);
         const data = Object.fromEntries(formDatas.entries());
         data.isPublic = data.isPublic === "on" ? true : false;
+        data._id = params.id;
+        data.creator = dataBoard.creator;
+        data.pixelsView = dataBoard.pixelsView;
         setStep('loading');
-        createBoard(data).then((res) => {
+        updateBoard(data).then((res) => {
             setStep('success');
         }).catch((error) => {
             setStep('error');
@@ -102,7 +105,7 @@ const UpdateBoard = () => {
                     </Label>
                     <Input name='delais' type="range" min="10" max="3600" step="1" aria-label="delais" onChange={changeDelais} defaultValue={dataBoard.delais} />
                 </FormGroup>
-                {step === 'success' && <UncontrolledAlert color="success">Le tableau a bien été créé</UncontrolledAlert>}
+                {step === 'success' && <UncontrolledAlert color="success">Le tableau a bien été modifié</UncontrolledAlert>}
                 {step === 'error' && <UncontrolledAlert color="danger">Une erreur est survenue</UncontrolledAlert>}
                 <FormGroup>
                 {step === 'loading' ? <Button size="lg" disabled>Chargement...</Button> : <Button color="primary" type="submit" size="lg" >Modifier</Button>}
