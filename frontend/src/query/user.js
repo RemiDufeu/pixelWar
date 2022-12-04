@@ -41,7 +41,6 @@ export const getAllUsers = async () => {
 	}
 };
 export const getUser = async (id) => {
-	console.log("TOKEN AVANT"+localStorage.getItem('token'));
 	const resp = await fetch(`${REACT_APP_API_URL}${USER_API_PATH}${USER}/${id}`,
 	
 		{
@@ -53,14 +52,9 @@ export const getUser = async (id) => {
 			
 		},
 		);
-		
-		console.log("TOKEN APRES"+localStorage.getItem('token'));
-		console.log(" VRAI TOKTEN eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzgyMDdjZjhhYzQ5OGVkYWI3N2JiZjMiLCJ1c2VyUm9sZSI6InVzZXIiLCJpYXQiOjE2Njk0OTEwNzgsImV4cCI6MTY3MjA4MzA3OH0.v3tr5kMQFHHsm8VId5DM-E8FLm4S9gusBD0bYuO7aRw")
 
 		
 	if (resp.ok) {
-		console.log("OOKKKKKKKK RESPONSE");
-		console.log(resp);
 		return resp.json();
 	}
 	if (!resp.ok){
@@ -234,7 +228,6 @@ export const deleteUser = async (id) => {
 	);
 
 	if (resp.ok) {
-		console.log("SUPPRESSION OK");
 		return resp.json();
 	}
 	if (!resp.ok){
@@ -264,9 +257,6 @@ export const updatePassword = async (id,password,newPassword,passwordConfirm) =>
 		}
 	);
 
-	console.log("RESPONSE"+resp);
-	console.log("RESPONSE OK"+resp.ok);
-	console.log("RESPONSE STATUS"+resp.status);
 	if (resp.ok) {
 		return resp.json();
 	}
