@@ -42,6 +42,8 @@ code {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  color: #696969;
+  text-shadow: grey 1px 0 10px;
 }
 
 .titleBoardPage{
@@ -122,4 +124,8 @@ code {
   line-height: 2em;
   font-size: 20px;
 
+}
+.proprietes{
+  border: thick double darkblue;
+  padding: 15px 15px 15px 15px;
 }

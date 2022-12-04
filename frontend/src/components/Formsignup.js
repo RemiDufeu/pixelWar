@@ -5,6 +5,7 @@ import { postUser } from "../query/user";
 import Loading from "./Loading";
 import {FiUserPlus} from "react-icons/fi";
 import React from "react";
+import { AiFillCaretRight } from "react-icons/ai";
 
 const Formsignup = ({redirectUrl = "/SignIn"}) => {
   const [name, setName] = useState("");
@@ -94,7 +95,9 @@ const Formsignup = ({redirectUrl = "/SignIn"}) => {
       />
       <Label for="passwordConfirm">PasswordConfirm</Label>
         </FormGroup>
-        {loading ? <Loading></Loading> : <Button onClick={handlePost} size="lg" color="primary" style={{marginTop: 30,textAlign: "center", margin: "auto", display: "flex"}}>Submit</Button>}
+        {loading ? <Loading></Loading> : <Button onClick={handlePost} color="primary" style={{marginTop: 30,textAlign: "center", margin: "auto", display: "flex"}}>Submit
+        <AiFillCaretRight className='iconbtn'/>
+        </Button>}
     </Form>
     </Container>
   );

@@ -30,7 +30,7 @@ const BoardPage = () => {
         <div>
         <h1 className="titleBoard">{board && board.name}</h1>
           <Container className="flexBetween">
-            <div>
+            <div className="proprietes">
               <h4>Game mode : {board && board.mode}</h4>
               <h4>Status : {board && board.status}</h4>
               <h4>End date : {board && new Date(board.dateFin).toLocaleDateString()}</h4>
