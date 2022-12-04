@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {deleteUser, getUser} from '../query/user';
-import {Button, ButtonGroup} from "reactstrap";
+import { Container,ButtonGroup, Button, Card, CardBody, CardFooter, CardHeader, CardSubtitle, CardTitle } from 'reactstrap'
 //import { TopBar} from '../components/Topbar';
 
 // import PropTypes from 'prop-types';
@@ -20,21 +20,31 @@ import {Button, ButtonGroup} from "reactstrap";
 	}, []);
 
 	return (
-		<section>
-			<h1>Profile Info</h1>
-			<ul>
-                    <li>{user._id}</li>
-                    <li>{user.nom}</li>
-                    <li>{user.prenom}</li>
-                    <li>{user.email}</li>
-                    <li>{user.role}</li>
-			</ul>
-			<ButtonGroup>
-				<Button color="primary" href={"/UserUpdateDetails/" + user._id}>
-					Edit
-				</Button>
-			</ButtonGroup>
-		</section>
+		<Container style={{marginTop: "50px", paddingLeft:"10%",paddingRight:"10%"}}>
+		<Card>
+        <CardHeader>
+		Profile Info
+        </CardHeader>
+        <CardBody style={{textAlign : 'center'}}>
+          <CardTitle tag="h5">
+           ID:  {user._id}
+          </CardTitle>
+          <CardSubtitle> Lastname: {user.nom}</CardSubtitle>
+		  <CardSubtitle> Name: {user.prenom}</CardSubtitle>
+		  <CardSubtitle> Email: {user.email}</CardSubtitle>
+		  <CardSubtitle> Role: {user.role}</CardSubtitle>
+          <br></br>
+          
+        </CardBody>
+        <CardFooter>
+		<ButtonGroup>
+		   <Button color="primary" href={"/UserUpdateDetails/" + user._id}>
+			   Edit
+		   </Button>
+	   </ButtonGroup>
+        </CardFooter>
+    </Card>
+	</Container>
 	);
 };
 export default User;
