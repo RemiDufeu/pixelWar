@@ -8,16 +8,16 @@ const User = require('../models/User')
 exports.signUp = (req, res, next) => {
 
     if (req.body.password.length < 6) {
-        return res.status(400).json({error: 'Mot de passe trop court, 6 caractères minimum'})
+        return res.status(400).json({error: 'Password too short, 6 characters minimum'})
     }
 
     if (req.body.password !== req.body.passwordConfirm) {
-        return res.status(400).json({error: 'Mot de passe non identique'})
+        return res.status(400).json({error: 'Non-identical passwords'})
     }
 
     User.findOne({email: req.body.email}).then(user => {
         if (user) {
-            return res.status(400).json({error: 'Utilisateur déjà existant'})
+            return res.status(400).json({error: 'User already exists'})
         } else {
             bcrypt.hash(req.body.password, parseInt(process.env.NBHACH))
                 .then(hash => {
@@ -29,7 +29,7 @@ exports.signUp = (req, res, next) => {
                     })
                     user.save()
                 })
-                .then(() => res.status(201).json({message: "Utilisateur créé !"}))
+                .then(() => res.status(201).json({message: "User is created !"}))
                 .catch(error => res.status(500).json({error}))
         }
     })
@@ -39,12 +39,12 @@ exports.signIn = (req, res, next) => {
     User.findOne({email: req.body.email})
         .then(user => {
             if (!user) {
-                return res.status(401).json({error: 'Utilisateur non trouvé !'})
+                return res.status(401).json({error: 'User not found !'})
             }
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {
                     if (!valid) {
-                        return res.status(401).json({error: 'Mot de passe incorrect !'})
+                        return res.status(401).json({error: 'Incorrect password !'})
                     }
                     res.status(200).json({
                         userId: user.id,
@@ -72,58 +72,58 @@ exports.signInToken = (req, res, next) => {
 
     try {
         jwt.verify(token, process.env.JWTCRYPT)
-        res.status(200).json({message: 'Utlisateur authentifié', user: jwt.decode(token)})
+        res.status(200).json({message: 'User is authenticated', user: jwt.decode(token)})
 
     } catch (error) {
-        res.status(401).json({error: 'Requête non authentifiée !'})
+        res.status(401).json({error: 'Unauthenticated request !'})
     }
 
 }
 
 exports.getUsers = (req, res, next) => {
     User.find({})
-        .then(users => res.status(200).json({message: 'Objets trouvés', data: users}))
+        .then(users => res.status(200).json({message: 'Users found', data: users}))
         .catch(error => res.status(400).json({error}))
 }
 
 exports.getUser = (req, res, next) => {
     User.findOne({_id: req.params.id})
-        .then(user => res.status(200).json({message: 'Objet trouvé', data: user}))
+        .then(user => res.status(200).json({message: 'User found', data: user}))
         .catch(error => res.status(400).json({error}))
 }
 exports.updateUser = (req, res, next) => {
     User.updateOne({_id: req.params.id}, {email: req.body.email, nom: req.body.nom, prenom: req.body.prenom})
-        .then(() => res.status(200).json({message: 'User modifié !'}))
+        .then(() => res.status(200).json({message: 'User updated !'}))
         .catch(error => res.status(400).json({error}));
 }
 exports.updateRole = (req, res, next) => {
     User.updateOne({_id: req.params.id}, {role: req.body.role})
-        .then(() => res.status(200).json({message: 'Objet modifié !'}))
+        .then(() => res.status(200).json({message: 'Role updated !'}))
         .catch(error => res.status(400).json({error}));
 }
 exports.updatePassword = (req, res, next) => {
     //verification du nouveau mdp
     if (req.body.newPassword.length < 6) {
-        return res.status(400).json({error: 'Nouveau mdp trop court, 6 caractères minimum'})
+        return res.status(400).json({error: 'The new password is too short, 6 characters minimum'})
     }
     if (req.body.newPassword !== req.body.passwordConfirm) {
-        return res.status(400).json({error: 'Mots de passe non identiques'})
+        return res.status(400).json({error: 'Non-identical passwords'})
     }
     //verification du mdp actuel puis modification
     //si le mdp actuel est incorrect y aura pas de modif
     User.findOne({_id: req.params.id}).then(user => {
         if (!req.body.password) {
-            return res.status(400).json({error: 'Il faut indiquer le mdp actuel !'})
+            return res.status(400).json({error: 'You must indicate the current password !'})
         } else {
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {
                         if (!valid) {
-                            return res.status(400).json({error: 'Mot de passe actuel incorrect !'})
+                            return res.status(400).json({error: 'The current password is incorrect !'})
                         } else {
                             bcrypt.hash(req.body.newPassword, parseInt(process.env.NBHACH))
                                 .then(hash => {
                                     User.updateOne({_id: req.params.id}, {password: hash})
-                                        .then(() => res.status(200).json({message: 'Password modifié !'}))
+                                        .then(() => res.status(200).json({message: 'Password updated !'}))
                                         .catch(error => res.status(400).json({error}));
                                 })
                         }
@@ -138,6 +138,6 @@ exports.updatePassword = (req, res, next) => {
 }
 exports.deleteUser = (req, res, next) => {
     User.deleteOne({_id: req.params.id})
-        .then(() => res.status(200).json({message: 'Objet supprimé !'}))
+        .then(() => res.status(200).json({message: 'User deleted !'}))
         .catch(error => res.status(400).json({error}));
 }
