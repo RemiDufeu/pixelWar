@@ -31,7 +31,7 @@ const PixelBoards = ({pixelBoards, nameTab}) => {
             <Button color="primary" href={`/PixelBoard/${pixelBoard._id}`}>Participer</Button> :
             <Button color='secondary' disabled>Privé</Button>
           }
-          {user.userRole === 'admin' && <Button color="danger" onClick={() => deleteBoard(pixelBoard._id).then(() => window.location.reload())}>Supprimer</Button>}
+          {user && user.userRole === 'admin' && <Button color="danger" onClick={() => deleteBoard(pixelBoard._id).then(() => window.location.reload())}>Supprimer</Button>}
 
         </CardBody>
         <CardFooter>
